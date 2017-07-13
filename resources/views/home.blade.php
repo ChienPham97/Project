@@ -11,6 +11,7 @@
                 <div class="panel-body">
                     You are logged in!
                 </div>
+                <a href="{{ url('admin') }}">Quản Lý</a>
             </div>
         </div>
     </div>

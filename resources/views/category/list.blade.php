@@ -9,4 +9,4 @@
 			<td>{{ $item->title }}</td>
 		</tr>
 	@endforeach
-</table>u
+</table>

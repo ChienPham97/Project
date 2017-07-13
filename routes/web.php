@@ -21,6 +21,6 @@ Route::group(['middleware' => ['auth']], function (){
     Route::group(['middleware' => ['ckAdmin']], function (){
         //login va phai la admin
         Route::get('admin', 'Admin\DashboardController@index');
-        Route::get('admin/category', 'Admin\CategoryController@index');
+        Route::resource('admin/category', 'Admin\CategoryController');
     });
 });

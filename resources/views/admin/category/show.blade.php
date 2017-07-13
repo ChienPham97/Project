@@ -16,15 +16,25 @@
 
                 </ul><!-- /.breadcrumb -->
 
-                <div class="nav-search" id="nav-search">
-                    <form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input"
-                                           id="nav-search-input" autocomplete="off">
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-                    </form>
-                </div><!-- /.nav-search -->
+
+                {!! Form::open(['method' => 'GET', 'url' => 'admin/category']) !!}
+                    <div class="nav-search" id="nav-search">
+                        <form class="form-search">
+                                    <span class="input-icon">
+                                        <input type="text" placeholder="Search ..."
+                                               name="keyword"
+                                               class="nav-search-input"
+                                               id="nav-search-input"
+                                               autocomplete="off"
+                                               @if(Request::has('keyword')) value="{{ Request::get('keyword') }}" @endif
+                                        />
+                                        <i class="ace-icon fa fa-search nav-search-icon"></i>
+                                    </span>
+                        </form>
+                    </div>
+                    <!-- /.nav-search -->
+                {!! Form::close() !!}
+
             </div>
 
             <div class="page-content">
@@ -124,7 +134,8 @@
                 </div><!-- /.page-header -->
 
                 <div class="row">
-                    <a href="{{ url('admin/category/create') }}" style = "font-size: 15px ; margin-left: 15px">Create New</a>
+                    <a href="{{ url('admin/category/create') }}" style="font-size: 15px ; margin-left: 15px">Create
+                        New</a>
                     <br/><br/>
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
@@ -141,6 +152,7 @@
                                         </th>
                                         <th class="detail-col">ID</th>
                                         <th class="hidden-480">Category</th>
+                                        <th>Type</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -150,13 +162,39 @@
                                         @foreach($abc as $item)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" />
+                                                    <input type="checkbox"/>
                                                 </td>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->title }}</td>
+                                                <td>@if($item->type_id == 1)
+                                                        {{ $item->type_id = "LINH KIỆN MÁY TÍNH" }}
+                                                    @elseif($item->type_id == 2)
+                                                        {{ $item->type_id = "MÁY TÍNH XÁCH TAY" }}
+                                                    @elseif($item->type_id == 3)
+                                                        {{ $item->type_id = "MÁY TÍNH ĐỂ BÀN" }}
+                                                    @elseif($item->type_id == 4)
+                                                        {{ $item->type_id = "GAMEGEAR-COOLING" }}
+                                                    @elseif($item->type_id == 5)
+                                                        {{ $item->type_id = "GAMES NET" }}
+                                                    @elseif($item->type_id == 6)
+                                                        {{ $item->type_id = "THIẾT BỊ NGHE NHÌN" }}
+                                                    @elseif($item->type_id == 7)
+                                                        {{ $item->type_id = "THIẾT BỊ LƯU TRỮ" }}
+                                                    @elseif($item->type_id == 8)
+                                                        {{ $item->type_id = "THIẾT BỊ MẠNG" }}
+                                                    @elseif($item->type_id == 9)
+                                                        {{ $item->type_id = "THIẾT BỊ VĂN PHÒNG" }}
+                                                    @elseif($item->type_id == 10)
+                                                        {{ $item->type_id = "THIẾT BỊ KHÁC" }}
+                                                    @endif</td>
                                                 <td>
-                                                    <a href="{{ url('admin/category/'.$item->id.'/edit') }}" class="btn">Edit</a>
-                                                    <a href="{{ url('admin/category/'.$item->id.'/delete') }}" class="btn">Delete</a>
+                                                    {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/category/'.$item->id,'role'=>'from' ]) !!}
+                                                    <a href="{{ url('admin/category/'.$item->id.'/edit') }}"
+                                                       class="btn">Edit</a>
+                                                    <button type="submit" value="DELETE"
+                                                            onclick="return confirm('Are you sure?');">DELETE
+                                                    </button>
+                                                    {!! Form::close() !!}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -165,9 +203,6 @@
                                 </table>
                             </div><!-- /.span -->
                         </div><!-- /.row -->
-
-
-
 
 
                         <div id="modal-table" class="modal fade" tabindex="-1">
