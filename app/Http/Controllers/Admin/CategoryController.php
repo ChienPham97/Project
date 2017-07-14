@@ -14,14 +14,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index(Request $request)
     {
         if ($request->has('keyword')) {
 
-            $keyword = $request->has('keyword');
-            die($keyword);
+            $keyword = $request->get('keyword');
             $categories = Category::where('title', 'like', '%' . $keyword . '%')->get();
-        } else{
+        } else {
             $categories = Category::all();
         }
         return view('admin.category.show', [
@@ -51,7 +52,7 @@ class CategoryController extends Controller
         $c->title = $request->title;
         $c->type_id = $request->type_id;
         $c->save();
-        Session::flash('success', "Tao moi thanh cong!");
+        Session::flash('success', " Create " . $c->title . " succesfully ! ");
 
         return redirect('admin/category');
 
@@ -94,7 +95,7 @@ class CategoryController extends Controller
         $cate->title = $request->title;
         $cate->type_id = $request->type_id;
         $cate->save();
-        Session::flash('success', "Edit category successfully!!!");
+        Session::flash('success', "Edit " . $cate->title . " successfully!!!");
 
         return redirect('admin/category');
     }
@@ -107,7 +108,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+
         $cate = Category::findOrFail($id);
+        Session::flash('success', "Delete " . $cate->title . " succesfully");
         $cate->delete();
 
         return redirect('admin/category');

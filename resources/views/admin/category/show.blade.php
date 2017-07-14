@@ -17,18 +17,23 @@
                 </ul><!-- /.breadcrumb -->
 
 
+
                 {!! Form::open(['method' => 'GET', 'url' => 'admin/category']) !!}
                     <div class="nav-search" id="nav-search">
                         <form class="form-search">
                                     <span class="input-icon">
-                                        <input type="text" placeholder="Search ..."
+                                        <input type="text"
                                                name="keyword"
+                                               @if(Request::has('keyword'))
+                                               value="{{ Request::get('keyword') }}"
+                                               @endif
                                                class="nav-search-input"
                                                id="nav-search-input"
-                                               autocomplete="off"
-                                               @if(Request::has('keyword')) value="{{ Request::get('keyword') }}" @endif
+                                               placeholder="Search ..."
+
                                         />
                                         <i class="ace-icon fa fa-search nav-search-icon"></i>
+                                        <button type="submit"  id="btnSearch" >Search</button>
                                     </span>
                         </form>
                     </div>
@@ -133,6 +138,20 @@
                     </h1>
                 </div><!-- /.page-header -->
 
+                @if(Session::has('success'))
+                    <div class="alert alert-block alert-success">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>
+
+                        <p>
+                            <strong>
+                                <i class="ace-icon fa fa-check"></i>
+                                {{ Session::get('success') }}
+                            </strong>
+                        </p>
+                    </div>
+                @endif
                 <div class="row">
                     <a href="{{ url('admin/category/create') }}" style="font-size: 15px ; margin-left: 15px">Create
                         New</a>

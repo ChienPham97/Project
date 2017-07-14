@@ -119,7 +119,7 @@
 
                 <div class="page-header">
                     <h1>
-                        Create Category
+                        Edit " {{ $cate->title }} " Category
                     </h1>
                 </div><!-- /.page-header -->
 
@@ -131,8 +131,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Name </label>
                                 <div class="col-sm-9">
-                                    <input type="text" id="form-field-1" placeholder="Category Name" name="title"
-                                           class="col-xs-10 col-sm-5">
+                                    <input type="text" id="form-field-1"
+                                           placeholder="{{ $cate->title }}"
+                                           name="title"
+                                           class="col-xs-10 col-sm-5"
+                                           value="{{ $cate->title }}" />
                                 </div>
                             </div>
 
@@ -140,16 +143,16 @@
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Type</label>
                                 <div class="col-sm-9">
                                     <select name="type_id">
-                                        <option value="1">LINK KIỆN MÁY TÍNH</option>
-                                        <option value="2">MÁY TÍNH XÁCH TAY</option>
-                                        <option value="3">MÁY TÍNH ĐỂ BÀN</option>
-                                        <option value="4">GAMEGEAR-COOLING</option>
-                                        <option value="5">GAMES NET</option>
-                                        <option value="6">THIẾT BỊ NGHE NHÌN</option>
-                                        <option value="7">THIẾT BỊ LƯU TRỮ</option>
-                                        <option value="8">THIẾT BỊ MẠNG</option>
-                                        <option value="9">THIẾT BỊ VĂN PHÒNG</option>
-                                        <option value="10">THIẾT BỊ KHÁC</option>
+                                        <option value="1" @if( $cate->type_id == "1" ) selected @endif >LINK KIỆN MÁY TÍNH</option>
+                                        <option value="2" @if( $cate->type_id == "2" ) selected @endif >MÁY TÍNH XÁCH TAY</option>
+                                        <option value="3" @if( $cate->type_id == "3" ) selected @endif >MÁY TÍNH ĐỂ BÀN</option>
+                                        <option value="4" @if( $cate->type_id == "4" ) selected @endif >GAMEGEAR-COOLING</option>
+                                        <option value="5" @if( $cate->type_id == "5" ) selected @endif >GAMES NET</option>
+                                        <option value="6" @if( $cate->type_id == "6" ) selected @endif >THIẾT BỊ NGHE NHÌN</option>
+                                        <option value="7" @if( $cate->type_id == "7" ) selected @endif >THIẾT BỊ LƯU TRỮ</option>
+                                        <option value="8" @if( $cate->type_id == "8" ) selected @endif >THIẾT BỊ MẠNG</option>
+                                        <option value="9" @if( $cate->type_id == "9" ) selected @endif >THIẾT BỊ VĂN PHÒNG</option>
+                                        <option value="10" @if( $cate->type_id == "10" ) selected @endif >THIẾT BỊ KHÁC</option>
                                     </select>
                                 </div>
                             </div>
