@@ -22,5 +22,7 @@ Route::group(['middleware' => ['auth']], function (){
         //login va phai la admin
         Route::get('admin', 'Admin\DashboardController@index');
         Route::resource('admin/category', 'Admin\CategoryController');
+        Route::resource('admin/users','Admin\UserController');
+        Route::resource('admin/product','Admin\ProductController');
     });
 });
