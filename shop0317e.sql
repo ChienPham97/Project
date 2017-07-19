@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 12, 2017 lúc 11:22 SA
+-- Thời gian đã tạo: Th7 19, 2017 lúc 03:29 CH
 -- Phiên bản máy phục vụ: 10.1.21-MariaDB
 -- Phiên bản PHP: 5.6.30
 
@@ -29,16 +29,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(10) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `type_id` int(10) NOT NULL
+  `type_id` int(10) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `title`, `type_id`) VALUES
-(1, 'ASUS', 2),
-(2, 'ACER', 2);
+INSERT INTO `categories` (`id`, `title`, `type_id`, `updated_at`, `created_at`) VALUES
+(2, 'ACER', 2, '2017-07-13 10:07:34', '0000-00-00 00:00:00'),
+(3, 'DELL', 2, '2017-07-13 03:08:58', '2017-07-13 03:08:58'),
+(4, 'LENOVO', 2, '2017-07-13 03:09:33', '2017-07-13 03:09:33'),
+(5, 'CPU - BỘ VI XỬ LÝ', 1, '2017-07-13 03:10:38', '2017-07-13 03:10:38'),
+(6, 'SEVER GAME', 5, '2017-07-13 03:22:39', '2017-07-13 03:22:39');
 
 -- --------------------------------------------------------
 
@@ -70,6 +75,14 @@ CREATE TABLE `detail_purchase` (
   `money` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `detail_purchase`
+--
+
+INSERT INTO `detail_purchase` (`id`, `puchase_id`, `product_id`, `number`, `price`, `money`) VALUES
+(1, 1, 1, 1, 12000000, 12000000),
+(2, 1, 4, 1, 12000000, 12000000);
+
 -- --------------------------------------------------------
 
 --
@@ -91,17 +104,17 @@ CREATE TABLE `export_invoice` (
 
 CREATE TABLE `groups` (
   `id` int(10) NOT NULL,
-  `title` varchar(200) NOT NULL
+  `title` varchar(200) NOT NULL,
+  `position` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `groups`
 --
 
-INSERT INTO `groups` (`id`, `title`) VALUES
-(1, 'admin'),
-(2, '\r\ncustomer'),
-(3, 'staff');
+INSERT INTO `groups` (`id`, `title`, `position`) VALUES
+(1, 'admin', 'staff'),
+(2, '\r\ncustomer', 'user');
 
 -- --------------------------------------------------------
 
@@ -173,8 +186,19 @@ CREATE TABLE `products` (
   `price` float NOT NULL,
   `des` text,
   `sale` int(3) DEFAULT NULL,
-  `inventorynumber` int(11) DEFAULT NULL
+  `inventorynumber` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `supplier_id`, `type_id`, `price`, `des`, `sale`, `inventorynumber`, `created_at`, `updated_at`) VALUES
+(1, 'ACER SS02', 2, 5, 12000000, 'New', 20, 12, '2017-07-18 22:27:12', '2017-07-18 15:20:29'),
+(3, 'CPU - SK05', 4, 5, 500000, 'New', 0, 20, '2017-07-18 15:27:55', '2017-07-18 15:27:55'),
+(4, 'DELL - K04SV', 2, 3, 12000000, 'New', 0, 10, '2017-07-18 22:29:09', '2017-07-18 15:29:09');
 
 -- --------------------------------------------------------
 
@@ -189,6 +213,14 @@ CREATE TABLE `purchase_invoice` (
   `total_money` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `purchase_invoice`
+--
+
+INSERT INTO `purchase_invoice` (`id`, `supplier_id`, `trade_date`, `total_money`) VALUES
+(1, 1, '2017-07-20', 24000000),
+(2, 2, '2017-08-20', 24000000);
+
 -- --------------------------------------------------------
 
 --
@@ -202,6 +234,16 @@ CREATE TABLE `suppliers` (
   `contact` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `name`, `address`, `contact`) VALUES
+(1, 'Supplier A', 'Ba Đình - Cầu Giấy - Hà Nội ', 909876858),
+(2, 'Supplier B', 'Hà Đông - Hà Nội ', 90708982),
+(3, 'Supplier C', 'Ba Đình - Cầu Giấy - Hà Nội ', 909876858),
+(4, 'Supplier D', 'Hà Đông - Hà Nội ', 90708982);
+
 -- --------------------------------------------------------
 
 --
@@ -210,10 +252,13 @@ CREATE TABLE `suppliers` (
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `group_id` int(1) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `phone` int(15) DEFAULT NULL,
+  `position_id` int(1) NOT NULL DEFAULT '2',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group_id` int(1) DEFAULT '2',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -223,10 +268,9 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Nguyễn Thị Hoa', 'hoanguyen@shop0317e.com', '$2y$10$5eC7YXR7pZ5kRse/6u2qTOMWNdm2TM.4NpLc04OrTEjjb3K.QE0o.', 3, 'YsJpwbGJVJRch0orXzBHTPbjfINZEPi2Tol5Hdmml9TVt29AujfGfTvM3Ig7', '2017-07-05 16:08:58', '2017-07-05 16:08:58'),
-(5, 'admin', 'admin@shop0317e.com', '$2y$10$x1y5M3dNumviR4lVbINzzuByG07FMUDL5M5amgQldSFREzNtZkm3W', 1, 'jz0wyEQiLZTqOozvQa5ipxjnJZaxXfO5gwVOUJlzMZLTz70xu2sztGoIdFu3', '2017-07-05 16:21:10', '2017-07-05 16:21:10'),
-(6, 'Phạm Minh Chiến', 'minhchienpham97@gmail.com', '$2y$10$BsoBC4.8tRlNokluXf3KouHDAX5oSp3R.1YLX/S6riyV4KeF3PlgG', 2, 'qFt9yr34Sql5t1bnQtzkur77IdvwNDsict8DObfvXwz6tje2mh0f07OKCkf0', '2017-07-05 16:26:22', '2017-07-05 16:26:22');
+INSERT INTO `users` (`id`, `name`, `email`, `address`, `phone`, `position_id`, `password`, `group_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(5, 'admin', 'admin@shop0317e.com', 'admin', 1111, 1, '$2y$10$x1y5M3dNumviR4lVbINzzuByG07FMUDL5M5amgQldSFREzNtZkm3W', 1, 'gZPpeTEguiEUP5sxwtCT18BkcYuc4JEcFX8veW6ChTluioGBkXw4RBjnVybR', '2017-07-05 16:21:10', '2017-07-19 06:21:30'),
+(6, 'Phạm Minh Chiến', 'minhchienpham97@gmail.com', 'Thái Bình', 1687423992, 1, '$2y$10$BsoBC4.8tRlNokluXf3KouHDAX5oSp3R.1YLX/S6riyV4KeF3PlgG', 1, 'qFt9yr34Sql5t1bnQtzkur77IdvwNDsict8DObfvXwz6tje2mh0f07OKCkf0', '2017-07-05 16:26:22', '2017-07-16 18:17:15');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -312,7 +356,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT cho bảng `detail_export`
 --
@@ -322,7 +366,7 @@ ALTER TABLE `detail_export`
 -- AUTO_INCREMENT cho bảng `detail_purchase`
 --
 ALTER TABLE `detail_purchase`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `export_invoice`
 --
@@ -332,7 +376,7 @@ ALTER TABLE `export_invoice`
 -- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `images`
 --
@@ -349,15 +393,20 @@ ALTER TABLE `migrations`
 ALTER TABLE `news`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT cho bảng `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT cho bảng `purchase_invoice`
 --
 ALTER TABLE `purchase_invoice`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
