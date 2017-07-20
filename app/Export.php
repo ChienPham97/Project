@@ -11,9 +11,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Export extends Model
 {
-    public function Category(){
-        return $this->belongsTo('App\Category');
-      }
+    public function Users(){
+        return $this->belongsTo('App\Users');
+    }
 }

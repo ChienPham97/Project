@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 19, 2017 lúc 03:29 CH
+-- Thời gian đã tạo: Th7 20, 2017 lúc 09:05 CH
 -- Phiên bản máy phục vụ: 10.1.21-MariaDB
 -- Phiên bản PHP: 5.6.30
 
@@ -86,15 +86,25 @@ INSERT INTO `detail_purchase` (`id`, `puchase_id`, `product_id`, `number`, `pric
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `export_invoice`
+-- Cấu trúc bảng cho bảng `exports`
 --
 
-CREATE TABLE `export_invoice` (
+CREATE TABLE `exports` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `trade_date` date NOT NULL,
-  `total_money` float NOT NULL
+  `total` float NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `exports`
+--
+
+INSERT INTO `exports` (`id`, `user_id`, `trade_date`, `total`, `updated_at`, `created_at`) VALUES
+(1, 1, '2017-02-21', 3000000, '2017-07-20 11:54:23', '2017-07-20 11:54:23'),
+(2, 15, '2017-02-21', 3000000, '2017-07-20 11:54:39', '2017-07-20 11:54:39');
 
 -- --------------------------------------------------------
 
@@ -181,8 +191,8 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `products` (
   `id` int(10) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `supplier_id` int(10) NOT NULL,
-  `type_id` int(10) NOT NULL,
+  `thumbnail` text,
+  `category_id` int(10) NOT NULL,
   `price` float NOT NULL,
   `des` text,
   `sale` int(3) DEFAULT NULL,
@@ -195,31 +205,33 @@ CREATE TABLE `products` (
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `supplier_id`, `type_id`, `price`, `des`, `sale`, `inventorynumber`, `created_at`, `updated_at`) VALUES
-(1, 'ACER SS02', 2, 5, 12000000, 'New', 20, 12, '2017-07-18 22:27:12', '2017-07-18 15:20:29'),
-(3, 'CPU - SK05', 4, 5, 500000, 'New', 0, 20, '2017-07-18 15:27:55', '2017-07-18 15:27:55'),
-(4, 'DELL - K04SV', 2, 3, 12000000, 'New', 0, 10, '2017-07-18 22:29:09', '2017-07-18 15:29:09');
+INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`, `sale`, `inventorynumber`, `created_at`, `updated_at`) VALUES
+(1, 'ACER SS03', 'ACERcom.png', 2, 13000000, 'News', 0, 8, '2017-07-20 17:20:15', '2017-07-20 10:20:15'),
+(3, 'CPU - SK02', '12.png', 5, 550000, 'News', 10, 30, '2017-07-20 17:21:18', '2017-07-20 10:21:18'),
+(4, 'DELL - K04SVK', 'DELLcom.png', 3, 10000000, 'News', 25, 5, '2017-07-20 17:21:53', '2017-07-20 10:21:53'),
+(5, 'Chuột Fls03', 'MouseG.png', 6, 0, 'A', 0, 0, '2017-07-20 17:32:52', '2017-07-20 10:32:52');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `purchase_invoice`
+-- Cấu trúc bảng cho bảng `purchases`
 --
 
-CREATE TABLE `purchase_invoice` (
+CREATE TABLE `purchases` (
   `id` int(10) NOT NULL,
   `supplier_id` int(10) NOT NULL,
   `trade_date` date NOT NULL,
-  `total_money` float NOT NULL
+  `total` float NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `purchase_invoice`
+-- Đang đổ dữ liệu cho bảng `purchases`
 --
 
-INSERT INTO `purchase_invoice` (`id`, `supplier_id`, `trade_date`, `total_money`) VALUES
-(1, 1, '2017-07-20', 24000000),
-(2, 2, '2017-08-20', 24000000);
+INSERT INTO `purchases` (`id`, `supplier_id`, `trade_date`, `total`, `updated_at`, `created_at`) VALUES
+(2, 4, '2017-01-20', 142000000, '2017-07-20 11:24:45', '2017-07-20 11:24:45');
 
 -- --------------------------------------------------------
 
@@ -295,9 +307,9 @@ ALTER TABLE `detail_purchase`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `export_invoice`
+-- Chỉ mục cho bảng `exports`
 --
-ALTER TABLE `export_invoice`
+ALTER TABLE `exports`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -331,9 +343,9 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `purchase_invoice`
+-- Chỉ mục cho bảng `purchases`
 --
-ALTER TABLE `purchase_invoice`
+ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -356,7 +368,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `detail_export`
 --
@@ -368,10 +380,10 @@ ALTER TABLE `detail_export`
 ALTER TABLE `detail_purchase`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT cho bảng `export_invoice`
+-- AUTO_INCREMENT cho bảng `exports`
 --
-ALTER TABLE `export_invoice`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `exports`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `groups`
 --
@@ -396,11 +408,11 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT cho bảng `purchase_invoice`
+-- AUTO_INCREMENT cho bảng `purchases`
 --
-ALTER TABLE `purchase_invoice`
+ALTER TABLE `purchases`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `suppliers`

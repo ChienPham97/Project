@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') Product | Shop0317E @endsection
+@section('title') Purchase Invoice | Shop0317E @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -11,13 +11,13 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/product') }}">Product List</a>
+                        <a href="{{ url('admin/purchase') }}">Purchase Invoice List</a>
                     </li>
 
                 </ul><!-- /.breadcrumb -->
 
 
-                {!! Form::open(['method' => 'GET', 'url' => 'admin/product']) !!}
+                {!! Form::open(['method' => 'GET', 'url' => 'admin/purchase']) !!}
                 <div class="nav-search" id="nav-search">
                     <form class="form-search">
                                     <span class="input-icon">
@@ -133,7 +133,7 @@
 
                 <div class="page-header">
                     <h1>
-                        Product List
+                        Purchase Invoice List
                     </h1>
                 </div><!-- /.page-header -->
 
@@ -152,7 +152,7 @@
                     </div>
                 @endif
                 <div class="row">
-                    <a href="{{ url('admin/product/create') }}" style="font-size: 15px ; margin-left: 15px">Create
+                    <a href="{{ url('admin/purchase/create') }}" style="font-size: 15px ; margin-left: 15px">Create
                         New</a>
                     <br/><br/>
                     <div class="col-xs-12">
@@ -169,13 +169,9 @@
                                             </label>
                                         </th>
                                         <th class="detail-col">ID</th>
-                                        <th>Name</th>
-                                        <th>Thumbnail</th>
-                                        <th>Type</th>
-                                        <th>Price</th>
-                                        <th>Sale</th>
-                                        <th>Inventory Number</th>
-                                        <th>Description</th>
+                                        <th>Supplier</th>
+                                        <th>Trade_Date</th>
+                                        <th>Total</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -188,17 +184,11 @@
                                                     <input type="checkbox"/>
                                                 </td>
                                                 <td>{{ $item->id }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <img src="{{ url('uploads/product/' . $item->thumbnail) }}" alt="" width="120"/>
-                                                </td>
-                                                <td>{{ $item->category->title }}</td>
-                                                <td>{{ $item->price }}</td>
-                                                <td>{{ $item->sale }}</td>
-                                                <td>{{ $item->inventorynumber }}</td>
-                                                <td>{{ $item->des }}</td>
-                                                <td>{!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/product/'.$item->id,'role'=>'from' ]) !!}
-                                                    <a href="{{ url('admin/product/'.$item->id.'/edit') }}"
+                                                <td>{{ $item->supplier->name }}</td>
+                                                <td>{{ $item->trade_date }}</td>
+                                                <td>{{ $item->total }}</td>
+                                                <td>{!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/purchase/'.$item->id,'role'=>'from' ]) !!}
+                                                    <a href="{{ url('admin/purchase/'.$item->id.'/edit') }}"
                                                        class="btn">Edit</a>
                                                     <button type="submit" value="DELETE"
                                                             onclick="return confirm('Are you sure?');">DELETE

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title') Product | Shop0317E @endsection
+@section('title') Export Invoice | Shop0317E @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -11,13 +11,13 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/product') }}">Product List</a>
+                        <a href="{{ url('admin/export') }}">Export Invoice List</a>
                     </li>
 
                 </ul><!-- /.breadcrumb -->
 
 
-                {!! Form::open(['method' => 'GET', 'url' => 'admin/product']) !!}
+                {!! Form::open(['method' => 'GET', 'url' => 'admin/export']) !!}
                 <div class="nav-search" id="nav-search">
                     <form class="form-search">
                                     <span class="input-icon">
@@ -42,98 +42,11 @@
             </div>
 
             <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
 
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                    <div class="dropdown dropdown-colorpicker"><a data-toggle="dropdown"
-                                                                                  class="dropdown-toggle"><span
-                                                    class="btn-colorpicker" style="background-color:#438EB9"></span></a>
-                                        <ul class="dropdown-menu dropdown-caret">
-                                            <li><a class="colorpick-btn selected" style="background-color:#438EB9;"
-                                                   data-color="#438EB9"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#222A2D;"
-                                                   data-color="#222A2D"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#C6487E;"
-                                                   data-color="#C6487E"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#D0D0D0;"
-                                                   data-color="#D0D0D0"></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-navbar" autocomplete="off">
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-sidebar" autocomplete="off">
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-breadcrumbs" autocomplete="off">
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
-                                       autocomplete="off">
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-add-container" autocomplete="off">
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
-
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
-                                       autocomplete="off">
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
-                                       autocomplete="off">
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
-                                       autocomplete="off">
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
 
                 <div class="page-header">
                     <h1>
-                        Product List
+                        Export Invoice List
                     </h1>
                 </div><!-- /.page-header -->
 
@@ -152,7 +65,7 @@
                     </div>
                 @endif
                 <div class="row">
-                    <a href="{{ url('admin/product/create') }}" style="font-size: 15px ; margin-left: 15px">Create
+                    <a href="{{ url('admin/export/create') }}" style="font-size: 15px ; margin-left: 15px">Create
                         New</a>
                     <br/><br/>
                     <div class="col-xs-12">
@@ -169,13 +82,9 @@
                                             </label>
                                         </th>
                                         <th class="detail-col">ID</th>
-                                        <th>Name</th>
-                                        <th>Thumbnail</th>
-                                        <th>Type</th>
-                                        <th>Price</th>
-                                        <th>Sale</th>
-                                        <th>Inventory Number</th>
-                                        <th>Description</th>
+                                        <th>User</th>
+                                        <th>Trade_Date</th>
+                                        <th>Total</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -188,17 +97,11 @@
                                                     <input type="checkbox"/>
                                                 </td>
                                                 <td>{{ $item->id }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>
-                                                    <img src="{{ url('uploads/product/' . $item->thumbnail) }}" alt="" width="120"/>
-                                                </td>
-                                                <td>{{ $item->category->title }}</td>
-                                                <td>{{ $item->price }}</td>
-                                                <td>{{ $item->sale }}</td>
-                                                <td>{{ $item->inventorynumber }}</td>
-                                                <td>{{ $item->des }}</td>
-                                                <td>{!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/product/'.$item->id,'role'=>'from' ]) !!}
-                                                    <a href="{{ url('admin/product/'.$item->id.'/edit') }}"
+                                                <td>{{ $item->user_id}}</td>
+                                                <td>{{ $item->trade_date }}</td>
+                                                <td>{{ $item->total }}</td>
+                                                <td>{!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/export/'.$item->id,'role'=>'from' ]) !!}
+                                                    <a href="{{ url('admin/export/'.$item->id.'/edit') }}"
                                                        class="btn">Edit</a>
                                                     <button type="submit" value="DELETE"
                                                             onclick="return confirm('Are you sure?');">DELETE
