@@ -170,7 +170,7 @@
                                         </th>
                                         <th class="detail-col">ID</th>
                                         <th>Name</th>
-                                        <th>Supplier</th>
+                                        <th>Thumbnail</th>
                                         <th>Type</th>
                                         <th>Price</th>
                                         <th>Sale</th>
@@ -182,6 +182,7 @@
                                 </thead>
                                 <tbody>
                                     @if($abc)
+<<<<<<< HEAD
                                     @foreach($abc as $key=>$item)
                                     <tr>
                                         <td>
@@ -200,6 +201,47 @@
                                                class="btn">Edit</a>
                                             <button type="submit" value="DELETE"
                                                     onclick="return confirm('Are you sure?');">DELETE
+=======
+                                        @foreach($abc as $item)
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox"/>
+                                                </td>
+                                                <td>{{ $item->id }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>
+                                                    <img src="{{ url('uploads/product/' . $item->thumbnail) }}" alt="" width="120"/>
+                                                </td>
+                                                <td>{{ $item->category->title }}</td>
+                                                <td>{{ $item->price }}</td>
+                                                <td>{{ $item->sale }}</td>
+                                                <td>{{ $item->inventorynumber }}</td>
+                                                <td>{{ $item->des }}</td>
+                                                <td>{!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/product/'.$item->id,'role'=>'from' ]) !!}
+                                                    <a href="{{ url('admin/product/'.$item->id.'/edit') }}"
+                                                       class="btn">Edit</a>
+                                                    <button type="submit" value="DELETE"
+                                                            onclick="return confirm('Are you sure?');">DELETE
+                                                    </button>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div><!-- /.span -->
+                        </div><!-- /.row -->
+
+
+                        <div id="modal-table" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header no-padding">
+                                        <div class="table-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                <span class="white">×</span>
+>>>>>>> b50f172391dd24e92f2d9ab8c9999d6aa3f117ce
                                             </button>
                                             {!! Form::close() !!}
                                         </td>

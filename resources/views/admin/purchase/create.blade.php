@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title')  Create Product| Shop0317E  @endsection
+@section('title')  Create Purchase Invoice| Shop0317E  @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -11,7 +11,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/product') }}">Product</a>
+                        <a href="{{ url('admin/purchase') }}">Purchase Invoice</a>
                     </li>
                     <li class="active">Create</li>
                 </ul><!-- /.breadcrumb -->
@@ -119,15 +119,15 @@
 
                 <div class="page-header">
                     <h1>
-                        Create Product
+                        Create Purchase Invoice
                     </h1>
                 </div><!-- /.page-header -->
 
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        {!! Form::open(['method' => 'POST', 'url' => 'admin/product', 'files' => true, 'role' => 'form']) !!}
-                            @include('admin.product.form')
+                        {!! Form::open(['method' => 'POST', 'url' => 'admin/purchase', 'files' => true, 'role' => 'form']) !!}
+                            @include('admin.purchase.form')
                         {!! Form::close() !!}
 
                         <div class="space-4"></div>
