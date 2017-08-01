@@ -8,9 +8,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
+
   position: relative;
-  font-weight:400px;
+  font-weight:400;
 }
 
 ul li {
@@ -501,7 +501,7 @@ ul.sub-menu {
 	color: red;
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
-	font-weight: 350;
+	font-weight: 300;
 	padding: 5px 0;
 }
 .single-widget p{
@@ -553,7 +553,7 @@ ul.sub-menu {
   color: red;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  font-weight: 350;
+  font-weight: 300;
   margin-top: 25px;
 }
 .searchform a{
@@ -689,6 +689,7 @@ ul.sub-menu {
   text-transform: uppercase;
   position: relative;
   z-index:3;
+  margin-top: 20px;
 }
 
 .left-sidebar h2:after, h2.title:after{
@@ -870,6 +871,7 @@ h2.title {
   text-transform: uppercase;
   margin-bottom: 30px;
   position: relative;
+  margin-top: 20px;
 }
 
 .product-image-wrapper{
@@ -891,7 +893,7 @@ h2.title {
 .productinfo h2{
 	color: red;
 	font-family: 'Roboto', sans-serif;
-	font-size: 24px;
+	font-size: 17px;
 	font-weight: 700;
 }
 .product-overlay h2{
@@ -910,7 +912,7 @@ h2.title {
 }
 
 .productinfo img{
-  width: 100%;
+  width: 70%;
 }
 
 .productinfo{
@@ -926,7 +928,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity: ;
+
 }
 
 .single-products:hover .product-overlay {
@@ -1007,7 +1009,7 @@ h2.title {
 .choose ul li a {
   color: red;
   font-family: 'Roboto', sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   padding-left: 0;
   padding-right: 0;
 }

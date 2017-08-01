@@ -54,7 +54,6 @@
                                         <li><a href="#">RAM - Bộ Nhớ Trong </a></li>
                                         <li><a href="#">VGA - Card Màn Hình</a></li>
                                         <li><a href="#">PSU - Nguồn Máy Tính</a></li>
-                                        <li><a href="#">MacBook</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -71,12 +70,10 @@
                             <div id="sportswear" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Sony Vaio </a></li>
                                         <li><a href="#">Asus </a></li>
                                         <li><a href="#">Acer </a></li>
                                         <li><a href="#">Dell</a></li>
                                         <li><a href="#">HP </a></li>
-                                        <li><a href="#">MacBook</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -86,7 +83,7 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#mens">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Máy Tính Để Bàn
+                                        GAME
                                     </a>
                                 </h4>
                             </div>

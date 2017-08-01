@@ -8,19 +8,19 @@
 </div>
 <div class="form-group">
     <label>Price</label>
-    {!! Form::number('price', '0', [ 'class' => 'form-control', 'value'=>'0']) !!}
+    {!! Form::number('price', $product->price, [ 'class' => 'form-control', 'value'=>'0']) !!}
 </div>
 <div class="form-group">
     <label>Sale</label>
-    {!! Form::number('sale', '0', [ 'class' => 'form-control', 'value'=>'0']) !!}
+    {!! Form::number('sale', $product->sale, [ 'class' => 'form-control', 'value'=>'0']) !!}
 </div>
 <div class="form-group">
     <label>Inventory Number</label>
-    {!! Form::number('inventorynumber', '0', [ 'class' => 'form-control', 'value'=>'0']) !!}
+    {!! Form::number('inventorynumber', $product->inventorynumber, [ 'class' => 'form-control', 'value'=>'0']) !!}
 </div>
 <div class="form-group">
     <label>Thumbnail</label>
-    {!! Form::file('thumbnail', ["class" => "form-control"]) !!}
+    {!! Form::file('thumbnail',null, ["class" => "form-control"]) !!}
 </div>
 
 <div class="form-group">
