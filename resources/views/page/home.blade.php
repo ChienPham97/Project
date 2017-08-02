@@ -15,27 +15,17 @@
                         <div class="carousel-inner">
                             @foreach($slider as $sl)
                                 <div class="item">
-                                    <div class="col-sm-6">
-                                        <h1>{{ $sl->h1 }}</h1>
-                                        <h2>{{ $sl->h2 }}</h2>
-                                        <p>{{ $sl->p }}</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <img src="source/images/home/{{ $sl->image }}" class="girl img-responsive"
+
+                                    <div class="col-sm-12">
+                                        <img src="source/images/slider/{{ $sl->image }}" class="girl img-responsive"
                                              alt="">
                                     </div>
                                 </div>
                             @endforeach
                             <div class="item active">
-                                <div class="col-sm-6">
-                                    <h1><span>E</span>-SHOPPER</h1>
-                                    <h2>100% Responsive Design</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. </p>
-                                    <button type="button" class="btn btn-default get">Chi Tiết</button>
-                                </div>
-                                <div class="col-sm-6">
-                                    <img src="source/images/home/girl2.jpg" class="girl img-responsive" alt="">
+
+                                <div class="col-sm-12">
+                                    <img src="source/images/slider/slider2.jpg" class="girl img-responsive" alt="">
                                 </div>
                             </div>
                         </div>
@@ -97,18 +87,18 @@
                 <!-- sản phẩm mới -->
                 <div class="tab-pane fade active in" id="tshirt">
                     @foreach($new_product as $new)
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="uploads/product/{{ $new->thumbnail }}" alt="">
-                                    <h2>{{ $new->price }}</h2>
-                                    <p>{{ $new->name }}</p>
-                                </div>
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="uploads/product/{{ $new->thumbnail }}" alt="">
+                                        <h2>{{ $new->price }}</h2>
+                                        <p>{{ $new->name }}</p>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 
@@ -149,159 +139,63 @@
 
                 <!-- Order -->
                 <div class="tab-pane fade" id="kids">
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="source/images/home/gallery1.jpg" alt="">
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
-                                        Tra Đơn Hàng</a>
-                                </div>
+                    @foreach($buy_product as $buy)
+                        <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="uploads/product/{{ $buy->thumbnail }}" alt="">
+                                        <h2>{{ $buy->price }}</h2>
+                                        <p>{{ $buy->name }}</p>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="source/images/home/gallery2.jpg" alt="">
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
-                                        Tra Đơn Hàng</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="source/images/home/gallery3.jpg" alt="">
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
-                                        Tra Đơn Hàng</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="product-image-wrapper">
-                            <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="source/images/home/gallery4.jpg" alt="">
-                                    <h2>$56</h2>
-                                    <p>Easy Polo Black Edition</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
-                                        Tra Đơn Hàng</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>
         </div><!--/category-tab-->
-
-        <div class="recommended_items"><!--recommended_items-->
+        @if(  count($fav_product) != 0 )
+        <div class="recommended_items"><!--Khách hàng chia sẻ-->
             <h2 class="title text-center">Khách Hàng Chia Sẻ</h2>
 
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend1.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
+                        @foreach($fav_product as $fav)
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="uploads/product/{{ $fav->thumbnail }}" alt="">
+                                            <h2>{{ $fav->price }}</h2>
+                                            <p>{{ $fav->name }}</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend2.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend3.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="item">
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend1.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
+                        @foreach($fav_product as $fav)
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="uploads/images/{{ $fav->image }}" alt="">
+                                            <h2>{{ $fav->price }}</h2>
+                                            <p>{{ $fav->name }}</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend2.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="single-products">
-                                    <div class="productinfo text-center">
-                                        <img src="source/images/home/recommend3.jpg" alt="">
-                                        <h2>$56</h2>
-                                        <p>Easy Polo Black Edition</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                    class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
@@ -312,6 +206,7 @@
                 </a>
             </div>
         </div><!--/recommended_items-->
+        @endif
 
     </div>
 @endsection

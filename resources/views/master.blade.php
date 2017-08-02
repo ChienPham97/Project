@@ -49,11 +49,9 @@
                             <div id="sportswear" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">CPU - Bộ Vi Xử Lý</a></li>
-                                        <li><a href="#">MAIN - Bo Mạch Chủ</a></li>
-                                        <li><a href="#">RAM - Bộ Nhớ Trong </a></li>
-                                        <li><a href="#">VGA - Card Màn Hình</a></li>
-                                        <li><a href="#">PSU - Nguồn Máy Tính</a></li>
+                                        @foreach($lkmt as $lk)
+                                            <li><a href="#">{{ $lk->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -67,13 +65,12 @@
                                     </a>
                                 </h4>
                             </div>
-                            <div id="sportswear" class="panel-collapse collapse">
+                            <div id="laptop" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Asus </a></li>
-                                        <li><a href="#">Acer </a></li>
-                                        <li><a href="#">Dell</a></li>
-                                        <li><a href="#">HP </a></li>
+                                        @foreach($laptop as $lt)
+                                            <li><a href="#">{{ $lt->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -83,20 +80,16 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#mens">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        GAME
+                                        GAMEGEAR-COOLING
                                     </a>
                                 </h4>
                             </div>
                             <div id="mens" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Máy Tính Để Bàn Asus</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn Dell</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn Acer</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn Lenovo</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn HP</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn Sunpac</a></li>
-                                        <li><a href="#">Máy Tính Để Bàn Apple Mac Pro</a></li>
+                                        @foreach($game as $g)
+                                            <li><a href="#">{{ $g->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -107,18 +100,16 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#womens">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Máy tính Bảng
+                                        Thiết Bị Nghe Nhìn
                                     </a>
                                 </h4>
                             </div>
                             <div id="womens" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Máy Tỉnh Bảng Apple</a></li>
-                                        <li><a href="#">Máy Tính Bảng Samsung</a></li>
-                                        <li><a href="#">Máy Tính Bảng Dell</a></li>
-                                        <li><a href="#">Máy Tính Bảng Asus</a></li>
-                                        <li><a href="#">Máy Tính Bảng Acer</a></li>
+                                        @foreach($tbnghenhin as $nn)
+                                            <li><a href="#">{{ $nn->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -128,18 +119,16 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#thietbivanphong">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Thiết Bị Văn Phòng
+                                        Thiết Bị Lưu Trữ
                                     </a>
                                 </h4>
                             </div>
                             <div id="thietbivanphong" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Máy Chiếu</a>
-                                        </li>
-                                        <li><a href="#">Máy In</a></li>
-                                        <li><a href="#">Máy Photocopy</a></li>
-                                        <li><a href="#">Máy Fax</a></li>
+                                        @foreach($tbluutru as $ss)
+                                            <li><a href="#">{{ $ss->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -150,54 +139,21 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordian" href="#server">
                                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        Máy Chủ/Server
+                                        Thiết Bị Văn Phòng
                                     </a>
                                 </h4>
                             </div>
                             <div id="server" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="#">Máy Server HP</a>
-                                        </li>
-                                        <li><a href="#">Máy Server Dell</a></li>
-                                        <li><a href="#">Máy Server Fujitsu</a></li>
+                                        @foreach($tbvanphong as $vp)
+                                            <li><a href="#">{{ $vp->title }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#camera">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        TB Mạng/Camera
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="camera" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="#">Thiết Bị Phát Wifi</a></li>
-                                        <li><a href="#">Thiết Bị CHia Mạng</a></li>
-                                        <li><a href="#">Modem Wifi</a></li>
-                                        <li><a href="#">Camera Giám Sát</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Phụ Kiện</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">Phần Mềm Bản Quyền</a></h4>
-                            </div>
-                        </div>
 
                     </div><!--/category-products-->
 
@@ -219,13 +175,14 @@
                     <div class="price-range"><!--price-range-->
                         <h2>Chất Lượng</h2>
                         <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10" data-slider-step="2" data-slider-value="[7,9]" id="sl2" ><br />
+                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10"
+                                   data-slider-step="2" data-slider-value="[7,9]" id="sl2"><br/>
                             <b class="pull-left">0</b> <b class="pull-right">10</b>
                         </div>
                     </div><!--/price-range-->
 
                     <div class="shipping text-center"><!--shipping-->
-                        <a href="#"><img src="source/images/home/shipping.jpg" alt="" /></a>
+                        <a href="#"><img src="source/images/home/shipping.jpg" alt=""/></a>
 
                     </div><!--/shipping-->
 
@@ -238,8 +195,6 @@
     </div>
 </section>
 @include('footer')
-
-
 
 
 <script src="source/js/jquery.js"></script>

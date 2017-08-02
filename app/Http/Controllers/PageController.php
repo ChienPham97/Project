@@ -14,7 +14,8 @@ class PageController extends Controller
         $new_product = Product::where('des','new')->paginate(8);
         $sale_product = Product::where('sale','<>','0')->paginate(8);
         $buy_product = Product::where('inventorynumber','<','15')->paginate(8);
-        return view('page.home',compact('slider','product','new_product','sale_product', 'buy_product'));
+        $fav_product = Product::where('favorite','<>','0')->get();
+        return view('page.home',compact('slider','product','new_product','sale_product', 'buy_product','fav_product'));
     }
 
     public function getProductType(){
