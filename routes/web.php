@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () { return view('index'); });
 Auth::routes();
 Route::get('/home', 'HomeController@index');
+Route::get('/product-details', function () { return view('product-details'); });
+Route::get('/shop', function () { return view('shop'); });
+Route::get('/checkout', function () { return view('checkout'); });
+Route::get('/cart', function () { return view('cart'); });
+//Route::get('/login', function () { return view('login'); });
 
 Route::group(['middleware' => ['auth']], function (){
     //login thi vao duoc ko can phai la admin

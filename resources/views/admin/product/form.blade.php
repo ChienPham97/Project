@@ -1,6 +1,6 @@
 <div class="form-group">
     <label>Title</label>
-    {!! Form::text('name', null, [ 'class' => 'form-control', 'placeholder' => "Title"]) !!}
+    {!! Form::text('name', null, [ 'class' => 'form-control', 'placeholder' => "Title", 'minlength' => "2", 'required']) !!}
 </div>
 <div class="form-group">
     <label>Category</label>

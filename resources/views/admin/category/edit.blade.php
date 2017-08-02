@@ -133,7 +133,7 @@
                                 <div class="col-sm-9">
                                     <input type="text" id="form-field-1"
                                            placeholder="{{ $cate->title }}"
-                                           name="title"
+                                           name="title" required=""
                                            class="col-xs-10 col-sm-5"
                                            value="{{ $cate->title }}" />
                                 </div>

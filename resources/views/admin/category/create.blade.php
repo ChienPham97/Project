@@ -131,7 +131,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Name </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="title" id="form-field-1" placeholder="Category Name"
+                                    <input type="text" name="title" id="form-field-1" placeholder="Category Name" required
                                            class="col-xs-10 col-sm-5">
                                 </div>
                             </div>
