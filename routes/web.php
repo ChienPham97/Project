@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () { return view('index'); });
 Auth::routes();
@@ -23,6 +13,7 @@ Route::get('/cart', function () { return view('cart'); });
 Route::group(['middleware' => ['auth']], function (){
     //login thi vao duoc ko can phai la admin
 
+
     Route::group(['middleware' => ['ckAdmin']], function (){
         //login va phai la admin
         Route::get('admin', 'Admin\DashboardController@index');
@@ -33,3 +24,18 @@ Route::group(['middleware' => ['auth']], function (){
         Route::resource('admin/export','Admin\ExportController');
     });
 });
+
+Route::get('index',[
+    "as" => "home" ,
+    "uses" => "PageController@getIndex"
+]);
+
+Route::get('product_type',[
+    "as" => "producttype" ,
+    "uses" => "PageController@getProductType"
+] );
+
+Route::get('product_detail',[
+    "as" => "productdetail" ,
+    "uses" => "PageController@getProductDetail"
+] );
