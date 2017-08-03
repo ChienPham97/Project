@@ -728,7 +728,7 @@ h2.title:before{
 }
 
 .category-products .panel {
-	background-color: #FFFFFF;
+	background-color: #fffbc5;
 	border: 0px;
 	border-radius: 0px;
 	box-shadow:none;
@@ -736,7 +736,7 @@ h2.title:before{
 }
 
 .category-products .panel-default .panel-heading {
-  background-color: blue;
+  background-color: #2bdaf7;
   border: 0 none;
   color: #FFFFFF;
   padding: 5px 20px;
@@ -750,7 +750,7 @@ h2.title:before{
   text-transform: uppercase;
 }
 .category-products .panel-default .panel-heading .panel-title a:hover{
-  color: red;
+  color: rgba(255, 0, 186, 0.53);
 
 }
 
@@ -1641,10 +1641,11 @@ h2.title {
 }
 
 #cart_items .cart_info .cart_description h4 a {
-  color: #363432;
+  color: #1999f7;
   font-family: 'Roboto',sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: normal;
+  margin-left: 40px;
 
 }
 
@@ -1655,13 +1656,13 @@ h2.title {
 
 #cart_items .cart_info .cart_price p {
   color:#696763;
-  font-size: 18px
+  font-size: 15px
 }
 
 
 #cart_items .cart_info .cart_total_price {
   color: #FE980F;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .cart_product {
@@ -2560,3 +2561,62 @@ h2.title {
 }
 
 
+.table>tbody>tr>td, .table>tfoot>tr>td{
+  vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+  table#cart tbody td .form-control{
+    width:20%;
+    display: inline !important;
+  }
+  .actions .btn{
+    width:36%;
+    margin:1.5em 0;
+  }
+
+  .actions .btn-info{
+    float:left;
+  }
+  .actions .btn-danger{
+    float:right;
+  }
+
+  table#cart thead { display: none; }
+  table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+  table#cart tbody tr td:first-child { background: #333; color: #fff; }
+  table#cart tbody td:before {
+    content: attr(data-th); font-weight: bold;
+    display: inline-block; width: 8rem;
+  }
+
+
+
+  table#cart tfoot td{display:block; }
+  table#cart tfoot td .btn{display:block;}
+
+}
+.bag{
+  display: block;
+  background-color: #b4ff00;
+  margin-top: 20px;
+  width: 159px;
+  height: 31px;
+  border-radius: 10px;
+}
+.bag > a{
+  display: inline-block;
+  font-size: 18px;
+  color: #ff0c91
+
+}
+
+.bag > a > img{
+
+  display: inline-block;
+  width: 30px;
+  border-radius: 15px;
+}
+
+.img-bill{
+  width: 100px;
+}

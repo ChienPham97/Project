@@ -53,7 +53,6 @@ class UserController extends Controller
         $c->name = $request->name;
         $c->address = $request->address;
         $c->phone = $request->phone;
-        $c->position_id = $request->position_id;
         $c->group_id = $request->group_id;
         $c->save();
         Session::flash('success', " Create " . $c->name . " succesfully ! ");
@@ -99,7 +98,6 @@ class UserController extends Controller
         $cate->name = $request->name;
         $cate->address = $request->address;
         $cate->phone = $request->phone;
-        $cate->position_id = $request->position_id;
         $cate->group_id = $request->group_id;
         $cate->save();
         Session::flash('success', "Edit " . $cate->name . " successfully!!!");

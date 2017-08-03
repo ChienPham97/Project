@@ -147,7 +147,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        {!! Form::open(['method' => 'POST', 'url' => 'admin/product', 'files' => true, 'role' => 'form']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => 'admin/product', 'files' => true]) !!}
                         <div class="form-group">
                             <label>Title</label>
                             {!! Form::text('name', null, [ 'class' => 'form-control', 'placeholder' => "Title"]) !!}

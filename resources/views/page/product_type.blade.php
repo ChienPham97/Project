@@ -7,52 +7,81 @@
         </div>
     </section>
 @endsection
-
+@section('danhmuc') @include('danhmuc') @endsection
 @section('content')
     <div class="col-sm-9 padding-right">
         <div class="features_items"><!--features_items-->
             <h2 class="title text-center">Sản phẩm mới</h2>
             <h5>{{count($new_product)}} sản phẩm mới</h5>
             @foreach($new_product as $new)
-            <div class="col-sm-4">
-                <div class="product-image-wrapper">
-                    <div class="single-products">
-                        <div class="productinfo text-center">
-                            <img src="uploads/product/{{ $new -> thumbnail }}" alt="">
-                            <h2>{{ $new->price }}</h2>
-                            <p>{{ $new->name }}</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
-                                cart</a>
-                        </div>
-                        <div class="product-overlay">
-                            <div class="overlay-content">
-                                <h2>{{ $new->price }}</h2>
+                <div class="col-sm-3">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="uploads/product/{{ $new -> thumbnail }}" alt="">
+                                <h2>{{ number_format($new->price) }}</h2>
                                 <p>{{ $new->name }}</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add
-                                    to cart</a>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
+                                    tra đơn hàng</a>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+                                    <h2>{{ number_format($new->price) }}</h2>
+                                    <p>{{ $new->name }}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
+                                        tra đơn hàng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="choose">
-                        <ul class="nav nav-pills nav-justified">
-                            <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                            <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                        </ul>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href=""><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
+                                <li><a href=""><i class="fa fa-plus-square"></i>Thêm vào giỏ</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
-
-
-            <h2 class="title text-center">Sản phẩm bán chạy</h2>
-            <div class="col-sm-9">
-            <ul class="pagination">
-                <li class="active"><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">»</a></li>
-            </ul>
-            </div>
         </div><!--features_items-->
+        <div class="row">{{$new_product->links()}}</div>
+
+        <div class="features_items"><!--features_items-->
+            <h2 class="title text-center">Sản Phẩm Nổi Bật</h2>
+            <h5>{{count($d_product)}} sản phẩm Nổi Bật</h5>
+            @foreach($d_product as $item)
+                <div class="col-sm-3">
+                    <div class="product-image-wrapper">
+                        <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="uploads/product/{{ $item -> thumbnail }}" alt="">
+                                <h2>{{ number_format($item->price) }}</h2>
+                                <p>{{ $item->name }}</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
+                                    tra
+                                    đơn hàng</a>
+                            </div>
+                            <div class="product-overlay">
+                                <div class="overlay-content">
+                                    <h2>{{ number_format($item->price) }}</h2>
+                                    <p>{{ $item->name }}</p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
+                                        tra đơn hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href=""><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
+                                <li><a href="{{ url('cart/add/'.$item->id) }}"><i class="fa fa-plus-square"></i>Thêm vào
+                                        giỏ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div><!--features_items-->
+        <div class="row">{{$d_product->links()}}</div>
     </div>
+
 @endsection

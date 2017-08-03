@@ -19,11 +19,13 @@ class PageController extends Controller
     }
 
     public function getProductType(){
-        $new_product = Product::where('des','new')->get();
-        return view('page.product_type',compact('new_product'));
+        $new_product = Product::where('des','new')->paginate(8);
+        $d_product = Product::where('inventorynumber','<',16)->where('inventorynumber','>',0)->paginate(8);
+        return view('page.product_type',compact('new_product','d_product'));
     }
 
     public function getProductDetail(){
+        $detail = Product::where('id','<>','0')->first();
         return view('page.product_detail');
     }
 }

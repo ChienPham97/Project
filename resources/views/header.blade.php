@@ -30,17 +30,17 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="http://localhost:8080/shop0317e/public/index"><img src="source/images/home/logo.png" alt=""></a>
+                        <a href="http://localhost:8080/shop0317e/public/index"><img src="source/images/home/logo.png"
+                                                                                    alt=""></a>
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li>
-                            <li><a href="#"><i class="fa fa-star"></i> Liên Hệ</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Kiểm Tra Đơn Hàng</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Thanh Toán</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Đăng Nhập</a></li>
+                            <li><a href="{{url('admin')}}"><i class="fa fa-user"></i> Tài Khoản</a></li>
+                            <li><a href="{{url('contact')}}"><i class="fa fa-star"></i> Liên Hệ</a></li>
+                            <li><a href="{{url('cart')}}"><i class="fa fa-crosshairs"></i> Kiểm Tra Đơn Hàng</a></li>
+                            <li><a href="{{url('login')}}"><i class="fa fa-lock"></i> Đăng Nhập</a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,7 +53,8 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -67,25 +68,35 @@
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ url('product_type') }}">Sản Phẩm</a></li>
                                     <li><a href="{{ url('product_detail') }}">Chi Tiết Sản Phẩm</a></li>
-                                    <li><a href="#">Kiểm Tra Đơn Hàng</a></li>
-                                    <li><a href="cart.html">Thanh Toán</a></li>
-                                    <li><a href="login.html">Đăng Nhập</a></li>
+                                    <li><a href="{{ url('cart') }}">Kiểm Tra Đơn Hàng</a></li>
+                                    <li><a href="{{ url('login') }}">Đăng Nhập</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#">Tin Tức<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Tin Tức Khuyến Mãi</a></li>
-                                    <li><a href="blog-single.html">Tin tức Công Nghệ</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="404.html">Chính Sách Vận Chuyển</a></li>
-                            <li><a href="contact-us.html">Trung Tâm Bảo Hành</a></li>
+                            <li><a href="{{ url('blog') }}">Khuyến Mãi</a></li>
+                            <li><a href="{{ url('contact') }}">Trung Tâm Bảo Hành</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
                         <input type="text" placeholder="Tìm Kiếm">
+
+                        <ul class="bag">
+                            <a href="{{ url('cart') }}" style="margin-right: 5px; margin-left: -31px;"><img src="source/images/giohang.jpg"  /></a>
+                            <a href="{{ url('cart') }}">
+                                <li class="bag_right"><p>
+                                        <?php $total = 0; ?>
+                                        @if(Cart::content())
+                                            @foreach(Cart::content() as $item)
+                                                <?php $total += $item->price; ?>
+                                            @endforeach
+                                        @endif
+                                        {{ number_format($total) }}
+                                    </p>
+                                </li>
+                            </a>
+                            <div class="clearfix"></div>
+                        </ul>
                     </div>
                 </div>
             </div>

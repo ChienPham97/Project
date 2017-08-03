@@ -4,16 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="SHOP0317E"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
+    <title>{{ config('app.name', 'PHP0317E') }}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/prettyPhoto.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/price-range.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('source/css/responsive.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -21,67 +24,53 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+@include('header')
+@yield('slider')
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Danh Mục</h2>
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                    </div><!--/category-products-->
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+                    <div class="price-range"><!--price-range-->
+                        <h2>Chất Lượng</h2>
+                        <div class="well text-center">
+                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10"
+                                   data-slider-step="2" data-slider-value="[7,9]" id="sl2"><br/>
+                            <b class="pull-left">0</b> <b class="pull-right">10</b>
+                        </div>
+                    </div><!--/price-range-->
+
+                    <div class="shipping text-center"><!--shipping-->
+                        <a href="#"><img src="source/images/home/shipping.jpg" alt=""/></a>
+
+                    </div><!--/shipping-->
+
                 </div>
             </div>
-        </nav>
 
-        @yield('content')
+            @yield('content')
+
+        </div>
     </div>
+</section>
+@include('footer')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('source/js/jquery.js') }}"></script>
+<script src="{{ asset('source/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('source/js/jquery.scrollUp.min.js') }}"></script>
+<script src="{{ asset('source/js/price-range.js') }}"></script>
+<script src="{{ asset('source/js/jquery.prettyPhoto.js') }}"></script>
+<script src="{{ asset('source/js/main.js') }}"></script>
 </body>
 </html>

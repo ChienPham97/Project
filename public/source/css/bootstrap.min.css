@@ -311,9 +311,9 @@ img {
 
 .img-responsive {
     display: block;
-    width: 960px;
-    height: 330px;
-    margin :auto;
+    width: 100%;
+    height: auto;
+    margin: auto;
 }
 
 .img-rounded {
