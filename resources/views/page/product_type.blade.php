@@ -21,22 +21,21 @@
                                 <img src="uploads/product/{{ $new -> thumbnail }}" alt="">
                                 <h2>{{ number_format($new->price) }}</h2>
                                 <p>{{ $new->name }}</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
+                                <a href="{{ url('cart') }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
                                     tra đơn hàng</a>
                             </div>
                             <div class="product-overlay">
                                 <div class="overlay-content">
                                     <h2>{{ number_format($new->price) }}</h2>
                                     <p>{{ $new->name }}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Kiểm
-                                        tra đơn hàng</a>
+                                    <a href="{{ url('product_detail/'.$new->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Chi Tiết Sản Phẩm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
                                 <li><a href=""><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
-                                <li><a href=""><i class="fa fa-plus-square"></i>Thêm vào giỏ</a></li>
+                                <li><a href="{{ url('cart/add/'.$new->id) }}"><i class="fa fa-plus-square"></i>Thêm vào giỏ</a></li>
                             </ul>
                         </div>
                     </div>

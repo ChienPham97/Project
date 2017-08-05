@@ -24,8 +24,10 @@ class PageController extends Controller
         return view('page.product_type',compact('new_product','d_product'));
     }
 
-    public function getProductDetail(){
-        $detail = Product::where('id','<>','0')->first();
-        return view('page.product_detail');
+    public function getProductDetail(Request $request){
+
+        $detail = Product::where('id',$request->id)->first();
+
+        return view('page.product_detail',compact('detail'));
     }
 }

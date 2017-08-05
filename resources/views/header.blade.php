@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="http://localhost:8080/shop0317e/public/index"><img src="source/images/home/logo.png"
+                        <a href="{{ url('index') }}"><img src="{{ asset('source/images/home/logo.png') }}"
                                                                                     alt=""></a>
                     </div>
                 </div>
@@ -67,7 +67,6 @@
                             <li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ url('product_type') }}">Sản Phẩm</a></li>
-                                    <li><a href="{{ url('product_detail') }}">Chi Tiết Sản Phẩm</a></li>
                                     <li><a href="{{ url('cart') }}">Kiểm Tra Đơn Hàng</a></li>
                                     <li><a href="{{ url('login') }}">Đăng Nhập</a></li>
                                 </ul>
@@ -82,7 +81,7 @@
                         <input type="text" placeholder="Tìm Kiếm">
 
                         <ul class="bag">
-                            <a href="{{ url('cart') }}" style="margin-right: 5px; margin-left: -31px;"><img src="source/images/giohang.jpg"  /></a>
+                            <a href="{{ url('cart') }}" style="margin-right: 5px; margin-left: -31px;"><img src="{{ asset('source/images/giohang.jpg') }}"  /></a>
                             <a href="{{ url('cart') }}">
                                 <li class="bag_right"><p>
                                         <?php $total = 0; ?>

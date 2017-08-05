@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 02, 2017 lúc 06:25 SA
+-- Thời gian đã tạo: Th8 03, 2017 lúc 06:29 SA
 -- Phiên bản máy phục vụ: 10.1.21-MariaDB
 -- Phiên bản PHP: 5.6.30
 
@@ -60,38 +60,6 @@ INSERT INTO `categories` (`id`, `title`, `type_id`, `created_at`, `updated_at`) 
 (19, 'HEADPHONE & MIC', 4, '2017-08-01 06:39:45', '2017-08-01 06:39:45'),
 (20, 'USB', 5, '2017-08-01 06:40:35', '2017-08-01 06:40:35'),
 (21, 'Ổ CỨNG GẮN NGOÀI', 5, '2017-08-01 06:41:12', '2017-08-01 06:41:12');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `export`
---
-
-CREATE TABLE `export` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `export_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `money` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `exports`
---
-
-CREATE TABLE `exports` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `trade_date` date NOT NULL,
-  `total` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -205,63 +173,6 @@ INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `purchase`
---
-
-CREATE TABLE `purchase` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `purchase_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `money` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `purchases`
---
-
-CREATE TABLE `purchases` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `suplier_id` int(11) NOT NULL,
-  `trade_date` date NOT NULL,
-  `total` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `slide`
---
-
-CREATE TABLE `slide` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `h1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `h2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `p` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `slide`
---
-
-INSERT INTO `slide` (`id`, `image`, `h1`, `h2`, `p`, `created_at`, `updated_at`) VALUES
-(1, 'slider1.jpg', 'E-SHOPPER', 'Free E-Commerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua. ', NULL, NULL),
-(2, 'slider2.jpg', 'E-SHOPPER', '100% Responsive Design', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL),
-(3, 'slider3.jpg', 'E-SHOPPER', 'Free Ecommerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `suppliers`
 --
 
@@ -310,18 +221,6 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `export`
---
-ALTER TABLE `export`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `exports`
---
-ALTER TABLE `exports`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `groups`
 --
 ALTER TABLE `groups`
@@ -352,24 +251,6 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `purchase`
---
-ALTER TABLE `purchase`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `purchases`
---
-ALTER TABLE `purchases`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `slide`
---
-ALTER TABLE `slide`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -390,16 +271,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT cho bảng `export`
---
-ALTER TABLE `export`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `exports`
---
-ALTER TABLE `exports`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT cho bảng `groups`
 --
@@ -425,21 +296,6 @@ ALTER TABLE `news`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT cho bảng `purchase`
---
-ALTER TABLE `purchase`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `purchases`
---
-ALTER TABLE `purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `slide`
---
-ALTER TABLE `slide`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT cho bảng `suppliers`
 --

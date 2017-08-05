@@ -30,8 +30,8 @@ Route::get('product_type', [
     "uses" => "PageController@getProductType"
 ]);
 
-Route::get('product_detail', [
-    "as" => "productdetail",
+Route::get('product_detail/{id}', [
+    "as" => "productdetail",gvb
     "uses" => "PageController@getProductDetail"
 ]);
 Route::get('cart', [

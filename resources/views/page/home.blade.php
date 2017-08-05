@@ -58,8 +58,8 @@
                                 <img src="uploads/product/{{ $p->thumbnail }}" alt="">
                                 <h2>{{ number_format($p->price) }}</h2>
                                 <p>{{ $p->name }}</p>
-                                <a href="{{ url('cart') }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
-                                    Kiểm Tra Đơn Hàng</a>
+                                <a href="{{ url('product_detail/'.$p->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                                    Chi Tiết Sản Phẩm</a>
                             </div>
                         </div>
                         <div class="choose">
@@ -95,8 +95,15 @@
                                         <img src="uploads/product/{{ $new->thumbnail }}" alt="">
                                         <h2>{{ number_format($new->price) }}</h2>
                                         <p>{{ $new->name }}</p>
+                                        <a href="{{ url('product_detail/'.$p->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                                            Chi Tiết Sản Phẩm</a>
                                     </div>
-
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
+                                        <li><a href="{{ url('cart/add/'.$new->id) }}"><i class="fa fa-plus-square"></i>Thêm Vào Giỏ</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
