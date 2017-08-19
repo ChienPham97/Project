@@ -1,11 +1,11 @@
-@extends('master')
+@extends('layouts.master')
 @section('title') Cart Page @endsection
 @section('content')
     <section id="cart_items">
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="{{ url('index') }}">Trang Chủ</a></li>
+                    <li><a href="{{ url('home') }}">Trang Chủ</a></li>
                     <li class="active">Kiểm tra đơn hàng</li>
                 </ol>
             </div><!--/breadcrums-->
@@ -137,7 +137,7 @@
                                 </p>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                <a class="cart_quantity_delete" href="{{ url('cart/destroy/'.$row->id) }}"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -154,6 +154,11 @@
                     </tr>
                     </tbody>
                 </table>
+                <div>
+                    <a href="{{ url('product') }}">Tiếp tục mua hàng</a>
+                    <a href="{{ url('cart/update') }}">Thanh Toán</a>
+                </div>
+
             </div>
         </div>
     </section>

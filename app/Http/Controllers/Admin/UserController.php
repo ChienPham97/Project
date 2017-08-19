@@ -6,16 +6,20 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Users;
+use App\Group;
 use Session;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $_groups = [];
 
+    public function __construct()
+    {
+        $groups = Group::all();
+        foreach ($groups as $group) {
+            $this->_groups[$group->id] = $group->title;
+        }
+    }
 
     public function index(Request $request)
     {
@@ -38,7 +42,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+
+        $group = Group::get()->pluck('title','id');
+        return view('admin.users.create', ['group'=>$group]);
     }
 
     /**
@@ -51,9 +57,11 @@ class UserController extends Controller
     {
         $c = new Users();
         $c->name = $request->name;
+        $c->email = $request->email;
         $c->address = $request->address;
         $c->phone = $request->phone;
         $c->group_id = $request->group_id;
+        $c->password = $request->password;
         $c->save();
         Session::flash('success', " Create " . $c->name . " succesfully ! ");
 
@@ -81,8 +89,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $cate = Users::findOrFail($id);
-
-        return view('admin.users.edit', ['cate' => $cate]);
+        $group = Group::get()->pluck('title','id');
+        return view('admin.users.edit', ['cate' => $cate,'group'=>$group]);
     }
 
     /**
@@ -96,6 +104,7 @@ class UserController extends Controller
     {
         $cate = Users::findOrFail($id);
         $cate->name = $request->name;
+        $cate->email = $request->email;
         $cate->address = $request->address;
         $cate->phone = $request->phone;
         $cate->group_id = $request->group_id;
@@ -113,11 +122,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
         $cate = Users::findOrFail($id);
         Session::flash('success', "Delete " . $cate->name . " succesfully");
         $cate->delete();
-
         return redirect('admin/users');
     }
 }

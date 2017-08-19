@@ -7,7 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content="SHOP0317E"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'PHP0317E') }}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ config('app.name', 'PHP0317E') }} @yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('source/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('source/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -17,6 +19,16 @@
     <link href="{{ asset('source/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('source/css/responsive.css') }}" rel="stylesheet">
 
+
+    <script src="{{ asset('source/js/html5shiv.js')}}"></script>
+    <script src="{{ asset('source/js/respond.min.js')}}"></script>
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -24,36 +36,29 @@
     </script>
 </head>
 <body>
-@include('header')
+@include('layouts.header')
 @yield('slider')
+
+<section>
+    <div class="container" style="margin-top: 20px;">
+        @if(Session::has('error'))
+            <div class="alert alert-danger">
+                <p>{{ Session::get('error') }}</p>
+            </div>
+        @elseif(Session::has('success'))
+            <div class="alert alert-success">
+                <p>{{ Session::get('success') }}</p>
+            </div>
+        @endif
+    </div>
+</section>
 
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Danh Mục</h2>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-
-
-
-                    </div><!--/category-products-->
-
-
-                    <div class="price-range"><!--price-range-->
-                        <h2>Chất Lượng</h2>
-                        <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10"
-                                   data-slider-step="2" data-slider-value="[7,9]" id="sl2"><br/>
-                            <b class="pull-left">0</b> <b class="pull-right">10</b>
-                        </div>
-                    </div><!--/price-range-->
-
-                    <div class="shipping text-center"><!--shipping-->
-                        <a href="#"><img src="source/images/home/shipping.jpg" alt=""/></a>
-
-                    </div><!--/shipping-->
-
+                    @yield('danhmuc')
                 </div>
             </div>
 
@@ -62,7 +67,7 @@
         </div>
     </div>
 </section>
-@include('footer')
+@include('layouts.footer')
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -72,5 +77,9 @@
 <script src="{{ asset('source/js/price-range.js') }}"></script>
 <script src="{{ asset('source/js/jquery.prettyPhoto.js') }}"></script>
 <script src="{{ asset('source/js/main.js') }}"></script>
+
 </body>
 </html>
+
+
+

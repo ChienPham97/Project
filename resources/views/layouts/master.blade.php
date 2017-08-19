@@ -27,7 +27,7 @@
 
 <body>
 
-@include('header')
+@include('layouts.header')
 @yield('slider')
 <div class="container" style="margin-top: 20px;">
     @if(Session::has('error'))
@@ -54,7 +54,7 @@
         </div>
     </div>
 </section>
-@include('footer')
+@include('layouts.footer')
 
 
 <script src="{{ asset('source/js/jquery.js')}}"></script>

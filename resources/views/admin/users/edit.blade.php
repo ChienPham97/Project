@@ -129,13 +129,23 @@
                     {!! Form::open(['method' => 'PATCH', 'url' => 'admin/users/' . $cate->id, 'role' => 'form']) !!}
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Name </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="name"> Name </label>
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1"
+                                <input type="text" id="name"
                                        placeholder="{{ $cate->name }}"
-                                       name="name" minlength=""
+                                       name="name" minlength="3"
                                        class="col-xs-10 col-sm-5"
-                                       value="{{ $cate->name }}" />
+                                       value="{{ $cate->name != null ? $cate->name:"3 ký tự trở lên." }}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="email"> Email </label>
+                            <div class="col-sm-9">
+                                <input type="email" id="email"
+                                       placeholder="{{ $cate->email }}"
+                                       name="email" minlength=""
+                                       class="col-xs-10 col-sm-5"
+                                       value="{{ $cate->email }}" />
                             </div>
                         </div>
                         <br/><br/>
@@ -154,32 +164,24 @@
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Phone </label>
                             <div class="col-sm-9">
                                 <input type="text" id="form-field-1"
-                                       placeholder="{{ $cate->phone }}"
-                                       name="phone" pattern="(\+84|0)\d{9,10}" minlength="10" maxlength="10"
+                                       placeholder="{{ $cate->phone != null ? $cate->phone:"Ví dụ: +84969969972 hoặc 0969969972" }}"
+                                       name="phone" pattern="(\+84|0)\d{9,13}""
                                        class="col-xs-10 col-sm-5"
                                        value="{{ $cate->phone }}" />
                             </div>
                         </div>
                         <br/><br/>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Type</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="group">Type</label>
                             <div class="col-sm-9">
-                                <select name="group_id">
-                                    <option value="1" @if( $cate->group_id == "1" ) selected @endif >ADMIN</option>
-                                    <option value="2" @if( $cate->group_id == "2" ) selected @endif >USER</option>
+                                <select name="group_id" id="group">
+                                    @foreach($group as $k=>$v)
+                                    <option value="{{$k}}" {{ ($k==$cate->group_id)?"selected":" "}}>{{$v}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div><br/><br/>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Type</label>
-                            <div class="col-sm-9">
-                                <select name="position_id">
-                                    <option value="1" @if( $cate->position_id == "1" ) selected @endif >NHÂN VIÊN</option>
-                                    <option value="2" @if( $cate->position_id == "2" ) selected @endif >KHÁCH HÀNG</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br/><br/>
+                        
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <input type="submit" class="btnSave" value="Update"/>

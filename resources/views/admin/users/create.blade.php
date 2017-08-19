@@ -134,6 +134,13 @@
                                 <input type="text" name="name" id="form-field-1" minlength="5" placeholder="User Name" class="col-xs-10 col-sm-5" required>
                             </div>
                         </div><br/><br/>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="email"> Email *</label>
+                            <div class="col-sm-9">
+                                <input type="email" name="email" id="form-field-1" minlength="5" placeholder="Email" class="col-xs-10 col-sm-5" required>
+                            </div>
+                        </div><br/><br/>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Address </label>
@@ -146,31 +153,29 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Phone *</label>
                             <div class="col-sm-9">
-                                <input type="text" name="phoneNumber" pattern="(\+84|0)\d{9,10}" id="phoneNumber" placeholder="Phone Numer"
+                                <input type="text" name="phone" pattern="(\+84|0)\d{9,13}" id="phone" placeholder="Ví dụ: +84969969972 hoặc 0969969972"
                                        class="col-xs-10 col-sm-5" required >
                             </div>
                         </div><br/><br/>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">GROUP</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Group</label>
                             <div class="col-sm-9">
-                                <select name="group_id">
-                                    <option value="1">ADMIN</option>
-                                    <option value="2">USER</option>
+                                <select name="group_id" id="group">
+                                    @foreach($group as $k=>$v)
+                                    <option value="{{$k}}">{{$v}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div><br/><br/>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">POSITION</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="password">Password *</label>
                             <div class="col-sm-9">
-                                <select name="position_id">
-                                    <option value="1">NHÂN VIÊN </option>
-                                    <option value="2">KHÁCH HÀNG</option>
-                                </select>
+                                <input type="password" name="password" id="password" placeholder="Password" class="col-xs-10 col-sm-5">
                             </div>
                         </div><br/><br/>
-
+                        
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <input type="submit" class="btnSave" value="Save"  />

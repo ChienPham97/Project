@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 @section('title') Product | Thế Giới Phụ Kiện @endsection
 @section('slider')
     <section id="advertisement">
@@ -7,7 +7,7 @@
         </div>
     </section>
 @endsection
-@section('danhmuc') @include('danhmuc') @endsection
+@section('danhmuc') @include('layouts.danhmuc') @endsection
 @section('content')
     <div class="col-sm-9 padding-right">
         <div class="features_items"><!--features_items-->

@@ -1,9 +1,15 @@
 <?php
 
 Auth::routes();
-Route::get('/', 'HomeController@index');
-Route::get('home', 'HomeController@index');
-Route::get('cart', 'CartController@index');
+Route::get('/','HomeController@index');
+Route::get('home','HomeController@index');
+Route::get('cart/add/{id}','CartController@store');
+Route::get('cart','CartController@index');
+Route::get('cart/destroy/{id}','CartController@destroy');
+Route::get('product','HomeController@ProductType');
+Route::get('product_detail/{id}','HomeController@ProductDetail');
+Route::get('news','HomeController@getNews');
+
 
 Route::group(['middleware' => ['auth']], function () {
     //login thi vao duoc ko can phai la admin
@@ -17,27 +23,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('admin/product', 'Admin\ProductController');
         Route::resource('admin/purchase', 'Admin\PurchaseController');
         Route::resource('admin/export', 'Admin\ExportController');
+       
     });
+   
+    Route::get('admin/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 });
 
-Route::get('index', [
-    "as" => "home",
-    "uses" => "PageController@getIndex"
-]);
 
-Route::get('product_type', [
-    "as" => "producttype",
-    "uses" => "PageController@getProductType"
-]);
 
-Route::get('product_detail/{id}', [
-    "as" => "productdetail",gvb
-    "uses" => "PageController@getProductDetail"
-]);
-Route::get('cart', [
-    "as" => "cart",
-    "uses" => "CartController@index"
-]);
-
-Route::get('cart/add/{id}', 'CartController@store');
-Route::get('cart/destroy', 'CartController@destroy');

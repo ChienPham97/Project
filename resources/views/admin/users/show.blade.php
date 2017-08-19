@@ -103,12 +103,7 @@
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->address }}</td>
                                                 <td>{{ $item->phone }}</td>
-                                                <td>@if($item->group_id == 1)
-                                                        {{ $item->group_id = "ADMIN" }}
-                                                    @elseif($item->group_id == 2)
-                                                        {{ $item->group_id = "USER" }}
-                                                    @endif</td>
-                                                <td>
+                                                <td>{{ (isset($item->group->title)?$item->group->title:"") }}<td>
                                                     {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/users/'.$item->id,'role'=>'from' ]) !!}
                                                     <a href="{{ url('admin/users/'.$item->id.'/edit') }}"
                                                        class="btn">Edit</a>

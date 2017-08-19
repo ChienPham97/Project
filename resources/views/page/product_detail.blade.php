@@ -1,6 +1,6 @@
-@extends('master')
+@extends('layouts.master')
 @section('title') Details Product @endsection
-@section('danhmuc') @include('danhmuc') @endsection
+@section('danhmuc') @include('layouts.danhmuc') @endsection
 @section('content')
     <div class="col-sm-9 padding-right">
         <div class="product-details"><!--product-details-->

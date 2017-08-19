@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <a href="{{ url('index') }}"><img src="{{ asset('source/images/home/logo.png') }}"
+                        <a href="{{ url('home') }}"><img src="{{ asset('source/images/home/logo.png') }}"
                                                                                     alt=""></a>
                     </div>
                 </div>
@@ -40,7 +40,11 @@
                             <li><a href="{{url('admin')}}"><i class="fa fa-user"></i> Tài Khoản</a></li>
                             <li><a href="{{url('contact')}}"><i class="fa fa-star"></i> Liên Hệ</a></li>
                             <li><a href="{{url('cart')}}"><i class="fa fa-crosshairs"></i> Kiểm Tra Đơn Hàng</a></li>
-                            <li><a href="{{url('login')}}"><i class="fa fa-lock"></i> Đăng Nhập</a></li>
+                            @if(Auth::check())
+                                <li><a href="{{url('logout')}}"><i class="fa fa-lock"></i>Đăng Xuất</a></li>
+                            @else
+                                <li><a href="{{url('login')}}"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -63,15 +67,14 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{ url('index') }}" class="active">Trang Chủ</a></li>
+                            <li><a href="{{ url('home') }}" class="active">Trang Chủ</a></li>
                             <li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ url('product_type') }}">Sản Phẩm</a></li>
                                     <li><a href="{{ url('cart') }}">Kiểm Tra Đơn Hàng</a></li>
-                                    <li><a href="{{ url('login') }}">Đăng Nhập</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ url('blog') }}">Khuyến Mãi</a></li>
+                            <li><a href="{{ url('news') }}">Khuyến Mãi</a></li>
                             <li><a href="{{ url('contact') }}">Trung Tâm Bảo Hành</a></li>
                         </ul>
                     </div>
@@ -87,7 +90,7 @@
                                         <?php $total = 0; ?>
                                         @if(Cart::content())
                                             @foreach(Cart::content() as $item)
-                                                <?php $total += $item->price; ?>
+                                                <?php $total = $total + $item->price*$item->qty; ?>
                                             @endforeach
                                         @endif
                                         {{ number_format($total) }}

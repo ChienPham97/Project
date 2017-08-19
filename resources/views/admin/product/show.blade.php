@@ -84,7 +84,7 @@
                                         <th class="detail-col">ID</th>
                                         <th>Name</th>
                                         <th>Thumbnail</th>
-                                        <th>Type</th>
+                                        <th>Category</th>
                                         <th>Price</th>
                                         <th>Sale</th>
                                         <th>Inventory Number</th>
