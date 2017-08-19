@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Type;
 use Session;
 
 class CategoryController extends Controller
@@ -13,14 +14,15 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         if ($request->has('keyword')) {
-
             $keyword = $request->get('keyword');
-            $categories = Category::where('title', 'like', '%' . $keyword . '%')->get();
+            $categories = Category::with('type')->where('title', 'like', '%' . $keyword . '%')->get();
         } else {
-            $categories = Category::all();
+            $categories = Category::with('type')->get();
         }
+       
+        $types = Type::get()->pluck('title','id');
         return view('admin.category.show', [
-            'abc' => $categories
+            'category' => $categories      
         ]);
     }
 

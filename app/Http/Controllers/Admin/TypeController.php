@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Group;
+use App\Type;
 
-class GroupController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $groups = Group::all();
-        return view('admin.group.show', [
-            'groups' => $groups
+        $types = Type::all();
+        return view('admin.type.show', [
+            'types' => $types
         ]);
     }
 

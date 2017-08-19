@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Users;
+use App\User;
 use App\Group;
 use Session;
+use App\Http\Requests\UserCreateRequests;
 
 class UserController extends Controller
 {
@@ -28,9 +28,9 @@ class UserController extends Controller
             $keyword = $request->get('keyword');
             $users = User::where('name', 'like', '%' . $keyword . '%')->get();
         } else {
-            $users = Users::all();
+            $users = User::all();
         }
-        return view('admin.users.show', [
+        return view('admin.user.show', [
             'abc' => $users
         ]);
     }
@@ -42,9 +42,8 @@ class UserController extends Controller
      */
     public function create()
     {
-
         $group = Group::get()->pluck('title','id');
-        return view('admin.users.create', ['group'=>$group]);
+        return view('admin.user.create', ['group'=>$group]);
     }
 
     /**
@@ -53,20 +52,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequests $request)
     {
-        $c = new Users();
-        $c->name = $request->name;
-        $c->email = $request->email;
-        $c->address = $request->address;
-        $c->phone = $request->phone;
-        $c->group_id = $request->group_id;
-        $c->password = $request->password;
-        $c->save();
-        Session::flash('success', " Create " . $c->name . " succesfully ! ");
-
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->group_id = $request->group_id;
+        $user->password = $request->password;
+        $user->save();
+        
+        Session::flash('success', " Create " . $user->name . " succesfully ! ");
         return redirect('admin/users');
-
     }
 
     /**
@@ -88,9 +86,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $cate = Users::findOrFail($id);
+        $user = User::findOrFail($id);
         $group = Group::get()->pluck('title','id');
-        return view('admin.users.edit', ['cate' => $cate,'group'=>$group]);
+        return view('admin.user.edit', ['user' => $user,'group'=>$group]);
     }
 
     /**
@@ -102,14 +100,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cate = Users::findOrFail($id);
-        $cate->name = $request->name;
-        $cate->email = $request->email;
-        $cate->address = $request->address;
-        $cate->phone = $request->phone;
-        $cate->group_id = $request->group_id;
-        $cate->save();
-        Session::flash('success', "Edit " . $cate->name . " successfully!!!");
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->group_id = $request->group_id;
+        $user->save();
+        Session::flash('success', "Edit \"" . $user->name . "\" successfully!!!");
 
         return redirect('admin/users');
     }
@@ -122,9 +120,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $cate = Users::findOrFail($id);
-        Session::flash('success', "Delete " . $cate->name . " succesfully");
-        $cate->delete();
+        $user = User::findOrFail($id);
+        Session::flash('success', "Delete " . $user->name . " succesfully");
+        $user->delete();
         return redirect('admin/users');
     }
 }

@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 19, 2017 lúc 03:42 SA
--- Phiên bản máy phục vụ: 10.1.21-MariaDB
--- Phiên bản PHP: 5.6.30
+-- Thời gian đã tạo: Th8 19, 2017 lúc 06:30 PM
+-- Phiên bản máy phục vụ: 10.1.22-MariaDB
+-- Phiên bản PHP: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -64,6 +66,63 @@ INSERT INTO `categories` (`id`, `title`, `type_id`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `danhmmuc`
+--
+
+CREATE TABLE `danhmmuc` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danhmmuc`
+--
+
+INSERT INTO `danhmmuc` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'LINH KIỆN MÁY TÍNH', NULL, NULL),
+(2, 'MÁY TÍNH XÁCH TAY', NULL, NULL),
+(3, 'GAMEGEAR-COOLING', NULL, NULL),
+(4, 'THIẾT BỊ NGHE NHÌN', NULL, NULL),
+(5, 'THIẾT BỊ LƯU TRỮ', NULL, NULL),
+(6, 'THIẾT BỊ VĂN PHÒNG', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `export`
+--
+
+CREATE TABLE `export` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `export_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `money` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `exports`
+--
+
+CREATE TABLE `exports` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `trade_date` date NOT NULL,
+  `total` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `groups`
 --
 
@@ -73,6 +132,14 @@ CREATE TABLE `groups` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `groups`
+--
+
+INSERT INTO `groups` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', NULL, NULL),
+(2, 'User', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,9 +187,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2017_08_01_094803_create_slider_tables', 6),
 (14, '2017_08_01_100050_create_slide_tables', 7),
 (15, '2017_08_02_030308_create_danhmuc_tables', 8),
-(16, '2017_08_09_093956_create_shoppingcart_table', 9),
-(17, '2017_08_18_135238_create_tables_order', 10),
-(18, '2017_08_18_142516_create_tables_order_details', 10);
+(16, '2017_08_09_093956_create_shoppingcart_table', 9);
 
 -- --------------------------------------------------------
 
@@ -186,6 +251,79 @@ INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `purchase`
+--
+
+CREATE TABLE `purchase` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `purchase_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `money` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `suplier_id` int(11) NOT NULL,
+  `trade_date` date NOT NULL,
+  `total` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `shoppingcart`
+--
+
+CREATE TABLE `shoppingcart` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `slide`
+--
+
+CREATE TABLE `slide` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `h1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `h2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `p` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `slide`
+--
+
+INSERT INTO `slide` (`id`, `image`, `h1`, `h2`, `p`, `created_at`, `updated_at`) VALUES
+(1, 'slider1.jpg', 'E-SHOPPER', 'Free E-Commerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua. ', NULL, NULL),
+(2, 'slider2.jpg', 'E-SHOPPER', '100% Responsive Design', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL),
+(3, 'slider3.jpg', 'E-SHOPPER', 'Free Ecommerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `suppliers`
 --
 
@@ -197,6 +335,33 @@ CREATE TABLE `suppliers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `types`
+--
+
+CREATE TABLE `types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `types`
+--
+
+INSERT INTO `types` (`id`, `name`) VALUES
+(1, 'LINH KIỆN MÁY TÍNH'),
+(2, 'MÁY TÍNH XÁCH TAY'),
+(3, 'MÁY TÍNH ĐỂ BÀN'),
+(4, 'GAMEGEAR-COOLING'),
+(5, 'GAMES NET'),
+(6, 'THIẾT BỊ NGHE NHÌN'),
+(7, 'THIẾT BỊ LƯU TRỮ'),
+(8, 'THIẾT BỊ MẠNG'),
+(9, 'THIẾT BỊ VĂN PHÒNG'),
+(10, 'THIẾT BỊ KHÁC');
 
 -- --------------------------------------------------------
 
@@ -214,7 +379,7 @@ CREATE TABLE `users` (
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `remember_token` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -222,8 +387,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `phone`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '', '2017-07-26 03:52:31', '2017-07-26 03:52:31', 'j5ypHwfLqiv8qRsmPmlJqW7NOZGbb9IgfERMf9UHB9G2yGFXaJzVH6maLB7C'),
-(2, 'Phạm Minh Chiến', 'minhchienpham97@gmail.com', '$2y$10$Cbn4qvBRn3ObcxCLqUaJkeGsuQv51p4mmjQiZeHn9WXSscLyc4SNG', '2', NULL, NULL, '2017-08-17 08:51:48', '2017-08-17 08:51:48', 'WyDEpaQ9rVBHYF24oXw1nzDtUDKGCcjMW6RQXXlq6u2bxbTcFKjz781nWgXb');
+(1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '+841231231231', '2017-07-26 03:52:31', '2017-08-18 18:41:59', NULL),
+(2, 'duy', 'admin@gmail.com', '$2y$10$.TBquufVoYpGy4239QWxM.wupybL4SKyVZXbeYlWb8JyyXB72sahi', '1', 'hn', '0969969972', '2017-08-18 02:18:40', '2017-08-18 03:34:07', 'XWrAb1GNUjog43umA6N8HT0rTvbdIWvzFSSndwdnKXgqi00MqWC2ADOpE5Xt'),
+(3, 'user', 'user@gmail.com', '$2y$10$rw1ym2sIanImpn/muDoKde89xyeGzB2BxB5voa4NU6krbTie./t5a', '2', NULL, NULL, '2017-08-18 03:09:54', '2017-08-18 03:09:54', 'sl4cVmJvsprHGZdvM1xwfaTK5yf7Eb6eIq04JpNsqrK62FUNfsVONth5eyvc'),
+(5, 'qwe123', 'khanhleesin9@gmail.com', '123123', '2', 'khánh', '0969969972', '2017-08-18 20:36:51', '2017-08-18 20:37:26', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -233,6 +400,24 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `
 -- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `danhmmuc`
+--
+ALTER TABLE `danhmmuc`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `export`
+--
+ALTER TABLE `export`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `exports`
+--
+ALTER TABLE `exports`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -266,6 +451,24 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `purchase`
+--
+ALTER TABLE `purchase`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `slide`
+--
+ALTER TABLE `slide`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -287,10 +490,25 @@ ALTER TABLE `users`
 ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
+-- AUTO_INCREMENT cho bảng `danhmmuc`
+--
+ALTER TABLE `danhmmuc`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `export`
+--
+ALTER TABLE `export`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `exports`
+--
+ALTER TABLE `exports`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `images`
 --
@@ -300,7 +518,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT cho bảng `news`
 --
@@ -312,6 +530,21 @@ ALTER TABLE `news`
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
+-- AUTO_INCREMENT cho bảng `purchase`
+--
+ALTER TABLE `purchase`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `slide`
+--
+ALTER TABLE `slide`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -320,7 +553,8 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
