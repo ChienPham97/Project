@@ -165,7 +165,7 @@
                             <div class="col-sm-9">
                                 <input type="text" id="form-field-1"
                                        placeholder="{{ $cate->phone != null ? $cate->phone:"Ví dụ: +84969969972 hoặc 0969969972" }}"
-                                       name="phone" pattern="(\+84|0)\d{9,13}""
+                                       name="phone" pattern="(\+84|0)\d{9,10}" minlength="10" maxlength="13"
                                        class="col-xs-10 col-sm-5"
                                        value="{{ $cate->phone }}" />
                             </div>
