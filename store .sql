@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 19, 2017 lúc 06:30 PM
+-- Thời gian đã tạo: Th8 22, 2017 lúc 04:46 AM
 -- Phiên bản máy phục vụ: 10.1.22-MariaDB
 -- Phiên bản PHP: 7.1.4
 
@@ -87,23 +87,6 @@ INSERT INTO `danhmmuc` (`id`, `title`, `created_at`, `updated_at`) VALUES
 (4, 'THIẾT BỊ NGHE NHÌN', NULL, NULL),
 (5, 'THIẾT BỊ LƯU TRỮ', NULL, NULL),
 (6, 'THIẾT BỊ VĂN PHÒNG', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `export`
---
-
-CREATE TABLE `export` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `export_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `money` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -216,6 +199,53 @@ INSERT INTO `news` (`id`, `image`, `title`, `content`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `adress` varchar(255) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `name`, `email`, `phone`, `adress`, `total`) VALUES
+(1, 0, 'Test', 'test@gmail.com', '0969969969', 'HN', '1'),
+(2, 1, NULL, NULL, NULL, NULL, NULL),
+(3, 2, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `price` decimal(10,0) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_detail`
+--
+
+INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`) VALUES
+(1, 1, 1, NULL),
+(2, 1, 2, NULL),
+(3, 1, 3, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `products`
 --
 
@@ -238,7 +268,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`, `sale`, `inventorynumber`, `favorite`, `created_at`, `updated_at`) VALUES
-(1, 'ACER K502', 'Asus_S510UA-BQ300.png', 3, 15999000.00, 'new', 10, 15, 1, '2017-07-28 17:24:13', '2017-08-01 08:11:45'),
+(1, 'ACER K502', '334623-archangel.jpg', 1, 15999000.00, 'new', 10, 15, 1, '2017-07-28 17:24:13', '2017-08-21 00:48:42'),
 (2, 'Xeon® Processor E5-2670', '2670.jpg', 5, 3245000.00, 'new', 0, 24, 0, '2017-08-01 04:28:54', '2017-08-01 06:07:43'),
 (3, 'Dell XPS 13', 'XPS_13.jpeg', 1, 38000000.00, 'new', 0, 8, 0, '2017-08-01 05:01:41', '2017-08-01 06:14:46'),
 (5, 'Intel® Core™ i7-6700K Processor', 'a11.png', 5, 7990000.00, 'new', 0, 13, 0, '2017-08-01 07:14:09', '2017-08-01 07:23:20'),
@@ -246,39 +276,8 @@ INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`
 (7, 'MSI X299 TOMAHAWK ARCTIC', '102425.png', 6, 8880000.00, 'old', 0, 13, 0, '2017-08-01 07:17:16', '2017-08-01 07:22:42'),
 (8, 'MSI X370 GAMING PLUS → Số 1 cho Game thủ!', 'main1.png', 6, 4260000.00, 'old', 15, 27, 0, '2017-08-01 07:19:00', '2017-08-01 08:12:06'),
 (9, 'G.SKILL RIPJAW 4 - 32GB', 'ram1.jpg', 8, 4500000.00, 'new', 0, 23, 0, '2017-08-01 07:20:37', '2017-08-01 07:20:37'),
-(10, 'Dell XPS 13 9360', 'dell2.jpg', 1, 31900000.00, 'old', 0, 15, 0, '2017-08-01 07:21:44', '2017-08-01 07:21:44');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `purchase`
---
-
-CREATE TABLE `purchase` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `purchase_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `money` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `purchases`
---
-
-CREATE TABLE `purchases` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `suplier_id` int(11) NOT NULL,
-  `trade_date` date NOT NULL,
-  `total` double(8,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(10, 'Dell XPS 13 9360', 'dell2.jpg', 1, 31900000.00, 'old', 0, 15, 0, '2017-08-01 07:21:44', '2017-08-01 07:21:44'),
+(16, 'test', '334623-archangel.jpg', 1, 15999000.00, 'new', 10, 15, 0, '2017-08-20 21:27:58', '2017-08-21 01:03:37');
 
 -- --------------------------------------------------------
 
@@ -295,6 +294,14 @@ CREATE TABLE `shoppingcart` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `shoppingcart`
+--
+
+INSERT INTO `shoppingcart` (`id`, `thumbnail`, `name`, `price`, `number`, `created_at`, `updated_at`) VALUES
+('', 'test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ', 'test ', '123123', 1, NULL, NULL),
+('', 'test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  test1  ', 'test1  ', '21123123', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,6 +343,14 @@ CREATE TABLE `suppliers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `name`, `address`, `contact`, `created_at`, `updated_at`) VALUES
+(1, 'intel', 'HN', 'US', NULL, NULL),
+(2, 'grforce', 'US', 'US', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -343,7 +358,7 @@ CREATE TABLE `suppliers` (
 --
 
 CREATE TABLE `types` (
-  `id` int(11) NOT NULL,
+  `id` int(10) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -390,7 +405,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `
 (1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '+841231231231', '2017-07-26 03:52:31', '2017-08-18 18:41:59', NULL),
 (2, 'duy', 'admin@gmail.com', '$2y$10$.TBquufVoYpGy4239QWxM.wupybL4SKyVZXbeYlWb8JyyXB72sahi', '1', 'hn', '0969969972', '2017-08-18 02:18:40', '2017-08-18 03:34:07', 'XWrAb1GNUjog43umA6N8HT0rTvbdIWvzFSSndwdnKXgqi00MqWC2ADOpE5Xt'),
 (3, 'user', 'user@gmail.com', '$2y$10$rw1ym2sIanImpn/muDoKde89xyeGzB2BxB5voa4NU6krbTie./t5a', '2', NULL, NULL, '2017-08-18 03:09:54', '2017-08-18 03:09:54', 'sl4cVmJvsprHGZdvM1xwfaTK5yf7Eb6eIq04JpNsqrK62FUNfsVONth5eyvc'),
-(5, 'qwe123', 'khanhleesin9@gmail.com', '123123', '2', 'khánh', '0969969972', '2017-08-18 20:36:51', '2017-08-18 20:37:26', NULL);
+(5, 'qwe123', 'khanhleesin9@gmail.com', '123123', '2', 'khánh', '0969969972', '2017-08-18 20:36:51', '2017-08-18 20:37:26', NULL),
+(6, 'qwe123', 'admin@gmail.com', '123123123', '1', NULL, NULL, '2017-08-20 18:48:57', '2017-08-20 18:48:57', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -406,12 +422,6 @@ ALTER TABLE `categories`
 -- Chỉ mục cho bảng `danhmmuc`
 --
 ALTER TABLE `danhmmuc`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `export`
---
-ALTER TABLE `export`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -445,21 +455,21 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `purchase`
---
-ALTER TABLE `purchase`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `purchases`
---
-ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -495,11 +505,6 @@ ALTER TABLE `categories`
 ALTER TABLE `danhmmuc`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT cho bảng `export`
---
-ALTER TABLE `export`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT cho bảng `exports`
 --
 ALTER TABLE `exports`
@@ -525,20 +530,20 @@ ALTER TABLE `migrations`
 ALTER TABLE `news`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT cho bảng `purchase`
---
-ALTER TABLE `purchase`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `purchases`
---
-ALTER TABLE `purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT cho bảng `slide`
 --
@@ -548,12 +553,12 @@ ALTER TABLE `slide`
 -- AUTO_INCREMENT cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

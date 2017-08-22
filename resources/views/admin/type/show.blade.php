@@ -92,8 +92,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if($abc)
-                                        @foreach($abc as $item)
+                                    @if($users)
+                                        @foreach($users as $item)
                                             <tr>
                                                 <td>
                                                     <input type="checkbox"/>

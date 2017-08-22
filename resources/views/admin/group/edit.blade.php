@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title')  Create Purchase Invoice| Shop0317E  @endsection
+@section('title') Edit Category @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -11,20 +11,10 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/purchase') }}">Purchase Invoice</a>
+                        <a href="{{ url('admin/category') }}">Category</a>
                     </li>
-                    <li class="active">Create</li>
+                    <li class="active">Edit</li>
                 </ul><!-- /.breadcrumb -->
-
-                <div class="nav-search" id="nav-search">
-                    <form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input"
-                                           id="nav-search-input" autocomplete="off">
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-                    </form>
-                </div><!-- /.nav-search -->
             </div>
 
             <div class="page-content">
@@ -43,20 +33,6 @@
                                         <option data-skin="skin-2" value="#C6487E">#C6487E</option>
                                         <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
                                     </select>
-                                    <div class="dropdown dropdown-colorpicker"><a data-toggle="dropdown"
-                                                                                  class="dropdown-toggle"><span
-                                                    class="btn-colorpicker" style="background-color:#438EB9"></span></a>
-                                        <ul class="dropdown-menu dropdown-caret">
-                                            <li><a class="colorpick-btn selected" style="background-color:#438EB9;"
-                                                   data-color="#438EB9"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#222A2D;"
-                                                   data-color="#222A2D"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#C6487E;"
-                                                   data-color="#C6487E"></a></li>
-                                            <li><a class="colorpick-btn" style="background-color:#D0D0D0;"
-                                                   data-color="#D0D0D0"></a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <span>&nbsp; Choose Skin</span>
                             </div>
@@ -119,23 +95,55 @@
 
                 <div class="page-header">
                     <h1>
-                        Create Purchase Invoice
+                        Edit " {{ $cate->title }} " Category
                     </h1>
                 </div><!-- /.page-header -->
 
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        {!! Form::open(['method' => 'POST', 'url' => 'admin/purchase', 'files' => true, 'role' => 'form']) !!}
-                            @include('admin.purchase.form')
-                        {!! Form::close() !!}
+                        {!! Form::open(['method' => 'PATCH', 'url' => 'admin/category/' . $cate->id, 'role' => 'form']) !!}
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Name </label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-1"
+                                           placeholder="{{ $cate->title }}"
+                                           name="title" required=""
+                                           class="col-xs-10 col-sm-5"
+                                           value="{{ $cate->title }}" />
+                                </div>
+                            </div>
 
-                        <div class="space-4"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Type</label>
+                                <div class="col-sm-9">
+                                    <select name="type_id">
+                                        <option value="1" @if( $cate->type_id == "1" ) selected @endif >LINK KIỆN MÁY TÍNH</option>
+                                        <option value="2" @if( $cate->type_id == "2" ) selected @endif >MÁY TÍNH XÁCH TAY</option>
+                                        <option value="3" @if( $cate->type_id == "3" ) selected @endif >MÁY TÍNH ĐỂ BÀN</option>
+                                        <option value="4" @if( $cate->type_id == "4" ) selected @endif >GAMEGEAR-COOLING</option>
+                                        <option value="5" @if( $cate->type_id == "5" ) selected @endif >GAMES NET</option>
+                                        <option value="6" @if( $cate->type_id == "6" ) selected @endif >THIẾT BỊ NGHE NHÌN</option>
+                                        <option value="7" @if( $cate->type_id == "7" ) selected @endif >THIẾT BỊ LƯU TRỮ</option>
+                                        <option value="8" @if( $cate->type_id == "8" ) selected @endif >THIẾT BỊ MẠNG</option>
+                                        <option value="9" @if( $cate->type_id == "9" ) selected @endif >THIẾT BỊ VĂN PHÒNG</option>
+                                        <option value="10" @if( $cate->type_id == "10" ) selected @endif >THIẾT BỊ KHÁC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9">
+                                    <input type="submit" class="btnSave" value="Update"/>
+                                </div>
+                            </div>
+                            {!! Form::close() !!}
+
+                            <div class="space-4"></div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

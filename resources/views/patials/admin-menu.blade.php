@@ -48,48 +48,76 @@
         </li>
 
         <li class="">
-            <a href="{{ url('admin/users') }}">
-                <i class="menu-icon fa fa-list"></i>
-                <span class="menu-text"> User </span>
+            <a href="{{ url('admin/group') }}">
+                <i class="menu-icon fa fa-users"></i>
+                <span class="menu-text"> Groups </span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/user') }}">
+                <i class="menu-icon fa fa-user"></i>
+                <span class="menu-text"> Users </span>
             </a>
         </li>
 
         <li class="">
             <a href="{{ url('admin/category') }}">
-                <i class="menu-icon fa fa-desktop"></i>
-                <span class="menu-text"> Category </span>
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text"> Categories </span>
             </a>
-
         </li>
 
         <li class="">
             <a href="{{ url('admin/product') }}">
-                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <i class="menu-icon fa fa-product-hunt"></i>
                 <span class="menu-text"> Products </span>
             </a>
-
-            <b class="arrow"></b>
-
         </li>
-
-        <li class="">
-            <a href="{{ url('admin/purchase') }}">
-                <i class="menu-icon fa fa-list-alt"></i>
-                <span class="menu-text"> Purchase Invoice </span>
-            </a>
-
-            <b class="arrow"></b>
-        </li>
-
+        
         <li class="">
             <a href="{{ url('admin/export') }}">
-                <i class="menu-icon fa fa-list-alt"></i>
+                <i class="menu-icon fa fa-phone-square"></i>
+                <span class="menu-text"> Suppliers </span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/type') }}">
+                <i class="menu-icon fa fa-check-square-o"></i>
+                <span class="menu-text"> Types </span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/order') }}">
+                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <span class="menu-text"> Orders </span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/new') }}">
+                <i class="menu-icon fa fa-newspaper-o"></i>
+                <span class="menu-text"> News </span>
+            </a>
+        </li>
+        
+        
+        <li class="">
+            <a href="{{ url('admin/export') }}">
+                <i class="menu-icon fa fa-upload"></i>
                 <span class="menu-text"> Export Invoice </span>
             </a>
-
-            <b class="arrow"></b>
         </li>
-
+        
+        <li class="">
+            <a href="{{ url('admin/slide') }}">
+                <i class="menu-icon fa fa-sliders"></i>
+                <span class="menu-text"> Slide </span>
+            </a>
+        </li>
     </ul><!-- /.nav-list -->
 
     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

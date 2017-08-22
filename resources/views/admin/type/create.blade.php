@@ -159,10 +159,10 @@
                         </div><br/><br/>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="phone"> Phone *</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="phone"> Phone</label>
                             <div class="col-sm-9">
                                 <input type="text" name="phone" id="phone" pattern="(\+84|0)\d{9,10}" id="phone" placeholder="Ví dụ: +84969969972 hoặc 0969969972"
-                                       class="col-xs-10 col-sm-5" minlength="10" maxlength="13" required >
+                                       class="col-xs-10 col-sm-5" minlength="10" maxlength="13" >
                             </div>
                         </div><br/><br/>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Users;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Export;
@@ -17,7 +17,7 @@ class ExportController extends Controller
 
     public function __construct()
     {
-        $users = Users::all();
+        $users = User::all();
         foreach ($users as $user) {
             $this->_users[$user->id] = $user->name;
         }

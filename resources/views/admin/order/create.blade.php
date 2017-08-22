@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('name') Edit User @endsection
+@section('title')  Create User | Shop0317E  @endsection
 @section('content')
 <div class="main-content">
     <div class="main-content-inner">
@@ -13,7 +13,7 @@
                 <li>
                     <a href="{{ url('admin/users') }}">User</a>
                 </li>
-                <li class="active">Edit</li>
+                <li class="active">Create</li>
             </ul><!-- /.breadcrumb -->
 
             <div class="nav-search" id="nav-search">
@@ -119,76 +119,77 @@
 
             <div class="page-header">
                 <h1>
-                    Edit " {{ $user->name }} " User
+                    Create User
                 </h1>
             </div><!-- /.page-header -->
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-xs-12">
                     <!-- PAGE CONTENT BEGINS -->
-                    {!! Form::open(['method' => 'PATCH', 'url' => 'admin/users/' . $user->id, 'role' => 'form']) !!}
-                    <form class="form-horizontal" role="form">
+                    {!! Form::open(['type' => 'POST', 'url' => 'admin/users', 'role' => 'form']) !!}
+                    <form class="form-horizontal" id="createForm" role="form">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="name"> Name </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="name"> Name *</label>
                             <div class="col-sm-9">
-                                <input type="text" id="name"
-                                       placeholder="{{ $user->name }}"
-                                       name="name" minlength="5"
-                                       class="col-xs-10 col-sm-5"
-                                       value="{{ $user->name != null ? $user->name:"3 ký tự trở lên." }}" />
+                                <input type="text" name="name" id="name" placeholder="User Name" required minlength="5" class="col-xs-10 col-sm-5">
                             </div>
-                        </div>
+                        </div><br/><br/>
+                        
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="email"> Email </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="email"> Email *</label>
                             <div class="col-sm-9">
-                                <input type="email" id="email"
-                                       placeholder="{{ $user->email }}"
-                                       name="email" minlength=""
-                                       class="col-xs-10 col-sm-5"
-                                       value="{{ $user->email }}" />
+                                <input type="email" name="email" id="email" minlength="5" placeholder="Email" class="col-xs-10 col-sm-5" required>
                             </div>
-                        </div>
-                        <br/><br/>
+                        </div><br/><br/>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Address </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="address"> Address </label>
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1"
-                                       placeholder="{{ $user->address }}"
-                                       name="address"
-                                       class="col-xs-10 col-sm-5"
-                                       value="{{ $user->address }}" />
+                                <input type="text" name="address" id="address" placeholder="Adress"
+                                       class="col-xs-10 col-sm-5">
                             </div>
-                        </div>
-                        <br/><br/>
+                        </div><br/><br/>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Phone </label>
+                            <label class="col-sm-3 control-label no-padding-right" for="phone"> Phone</label>
                             <div class="col-sm-9">
-                                <input type="text" id="form-field-1"
-                                       placeholder="{{ $user->phone != null ? $user->phone:"Ví dụ: +84969969972 hoặc 0969969972" }}"
-                                       name="phone" pattern="(\+84|0)\d{9,10}" minlength="10" maxlength="13"
-                                       class="col-xs-10 col-sm-5"
-                                       value="{{ $user->phone }}" />
+                                <input type="text" name="phone" id="phone" pattern="(\+84|0)\d{9,10}" id="phone" placeholder="Ví dụ: +84969969972 hoặc 0969969972"
+                                       class="col-xs-10 col-sm-5" minlength="10" maxlength="13" >
                             </div>
-                        </div>
-                        <br/><br/>
+                        </div><br/><br/>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="group">Type</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="group_id">Group</label>
                             <div class="col-sm-9">
-                                <select name="group_id" id="group">
+                                <select name="group_id" id="group_id">
                                     @foreach($group as $k=>$v)
-                                    <option value="{{$k}}" {{ ($k==$user->group_id)?"selected":" "}}>{{$v}}</option>
+                                    <option value="{{$k}}">{{$v}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div><br/><br/>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="password">Password *</label>
+                            <div class="col-sm-9">
+                                <input type="password" name="password" id="password" placeholder="Password" required class="col-xs-10 col-sm-5">
                             </div>
                         </div><br/><br/>
                         
                         <div class="form-group">
                             <div class="col-sm-9">
-                                <input type="submit" class="btnSave" value="Update"/>
+                                <input type="submit" class="btnSave" value="Save"  />
                             </div>
                         </div>
                         {!! Form::close() !!}
-
                         <div class="space-4"></div>
                     </form>
                 </div>
@@ -196,4 +197,5 @@
         </div>
     </div>
 </div>
+
 @endsection

@@ -30,9 +30,7 @@ class UserController extends Controller
         } else {
             $users = User::all();
         }
-        return view('admin.user.show', [
-            'abc' => $users
-        ]);
+        return view('admin.user.show', ['users'=>$users]);
     }
 
     /**
