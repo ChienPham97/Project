@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 22, 2017 lúc 04:46 AM
+-- Thời gian đã tạo: Th8 24, 2017 lúc 06:50 AM
 -- Phiên bản máy phục vụ: 10.1.22-MariaDB
 -- Phiên bản PHP: 7.1.4
 
@@ -61,7 +61,9 @@ INSERT INTO `categories` (`id`, `title`, `type_id`, `created_at`, `updated_at`) 
 (18, 'WEBCAM', 4, '2017-08-01 06:39:04', '2017-08-01 06:39:16'),
 (19, 'HEADPHONE & MIC', 4, '2017-08-01 06:39:45', '2017-08-01 06:39:45'),
 (20, 'USB', 5, '2017-08-01 06:40:35', '2017-08-01 06:40:35'),
-(21, 'Ổ CỨNG GẮN NGOÀI', 5, '2017-08-01 06:41:12', '2017-08-01 06:41:12');
+(21, 'Ổ CỨNG GẮN NGOÀI', 5, '2017-08-01 06:41:12', '2017-08-01 06:41:12'),
+(22, 'Test', 10, '2017-08-22 00:17:34', '2017-08-22 19:11:32'),
+(23, 'Test 12', 1, '2017-08-23 05:42:23', '2017-08-23 05:42:29');
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,8 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`id`, `title`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', NULL, NULL),
-(2, 'User', NULL, NULL);
+(2, 'User', NULL, NULL),
+(6, 'Tester', '2017-08-22 00:25:16', '2017-08-22 01:11:40');
 
 -- --------------------------------------------------------
 
@@ -180,7 +183,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `news` (
   `id` int(10) UNSIGNED NOT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -192,7 +195,7 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `image`, `title`, `content`, `created_at`, `updated_at`) VALUES
-(1, 'khaitruong.jpg', 'KHAI TRƯƠNG TƯNG BỪNG', 'Cửa hàng khai trương - khuyến mãi tưng bừng\r\n\r\n100 quà tặng dành cho khách hàng đến mua sản phẩm của cửa hàng đầu tiên !', NULL, NULL),
+(1, 'khaitruong.jpg', 'KHAI TRƯƠNG TƯNG BỪNG', 'Cửa hàng khai trương - khuyến mãi tưng bừng\r\n100 quà tặng dành cho khách hàng đến mua sản phẩm của cửa hàng đầu tiên !!', NULL, '2017-08-23 20:49:07'),
 (2, 'sale.jpg', 'KHUYẾN MÃI CỰC KHỦNG', 'Khuyến mãi 15% cho tất cả các mặt hàng !', NULL, NULL),
 (3, 'baotri.jpg', 'Bảo trì Website', 'Bảo trì Website từ ngày 9/8 đến 10/8', NULL, NULL);
 
@@ -208,18 +211,23 @@ CREATE TABLE `orders` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `adress` varchar(255) DEFAULT NULL,
-  `total` decimal(10,0) DEFAULT NULL
+  `address` varchar(255) DEFAULT NULL,
+  `total` decimal(10,0) DEFAULT NULL,
+  `status_id` int(2) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `name`, `email`, `phone`, `adress`, `total`) VALUES
-(1, 0, 'Test', 'test@gmail.com', '0969969969', 'HN', '1'),
-(2, 1, NULL, NULL, NULL, NULL, NULL),
-(3, 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `orders` (`id`, `user_id`, `name`, `email`, `phone`, `address`, `total`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, 6, 'Long', 'test@gmail.com', '0969969969', 'HN', '1', 1, NULL, '2017-08-23 19:28:51'),
+(2, 1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(3, 2, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(4, 6, 'Linh', 'test@gmail.com', '0969969969', 'HN', '1', 0, '2017-08-23 05:59:16', '2017-08-23 06:08:51'),
+(6, 6, NULL, NULL, NULL, NULL, NULL, -1, '2017-08-23 19:36:27', '2017-08-23 19:36:34');
 
 -- --------------------------------------------------------
 
@@ -252,13 +260,13 @@ INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `price`) VALUES
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` int(11) NOT NULL,
   `price` double(12,2) NOT NULL,
-  `des` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sale` int(11) NOT NULL,
-  `inventorynumber` int(11) NOT NULL,
-  `favorite` int(1) NOT NULL DEFAULT '0',
+  `des` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sale` int(11) DEFAULT NULL,
+  `inventorynumber` int(11) DEFAULT NULL,
+  `favorite` int(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -268,7 +276,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`, `sale`, `inventorynumber`, `favorite`, `created_at`, `updated_at`) VALUES
-(1, 'ACER K502', '334623-archangel.jpg', 1, 15999000.00, 'new', 10, 15, 1, '2017-07-28 17:24:13', '2017-08-21 00:48:42'),
+(1, 'ACER K502', 'Capture001.png', 1, 15999000.00, 'new', 10, 15, 1, '2017-07-28 17:24:13', '2017-08-23 04:41:59'),
 (2, 'Xeon® Processor E5-2670', '2670.jpg', 5, 3245000.00, 'new', 0, 24, 0, '2017-08-01 04:28:54', '2017-08-01 06:07:43'),
 (3, 'Dell XPS 13', 'XPS_13.jpeg', 1, 38000000.00, 'new', 0, 8, 0, '2017-08-01 05:01:41', '2017-08-01 06:14:46'),
 (5, 'Intel® Core™ i7-6700K Processor', 'a11.png', 5, 7990000.00, 'new', 0, 13, 0, '2017-08-01 07:14:09', '2017-08-01 07:23:20'),
@@ -277,7 +285,8 @@ INSERT INTO `products` (`id`, `name`, `thumbnail`, `category_id`, `price`, `des`
 (8, 'MSI X370 GAMING PLUS → Số 1 cho Game thủ!', 'main1.png', 6, 4260000.00, 'old', 15, 27, 0, '2017-08-01 07:19:00', '2017-08-01 08:12:06'),
 (9, 'G.SKILL RIPJAW 4 - 32GB', 'ram1.jpg', 8, 4500000.00, 'new', 0, 23, 0, '2017-08-01 07:20:37', '2017-08-01 07:20:37'),
 (10, 'Dell XPS 13 9360', 'dell2.jpg', 1, 31900000.00, 'old', 0, 15, 0, '2017-08-01 07:21:44', '2017-08-01 07:21:44'),
-(16, 'test', '334623-archangel.jpg', 1, 15999000.00, 'new', 10, 15, 0, '2017-08-20 21:27:58', '2017-08-21 01:03:37');
+(21, 'Test 1', 'Capture001.png', 1, 8000000.00, NULL, NULL, NULL, 0, '2017-08-22 20:43:43', '2017-08-22 20:43:43'),
+(22, 'P 1qwe', 'Capture001.png', 23, 8000000.00, NULL, 12, NULL, 0, '2017-08-23 05:43:34', '2017-08-23 05:43:53');
 
 -- --------------------------------------------------------
 
@@ -312,9 +321,9 @@ INSERT INTO `shoppingcart` (`id`, `thumbnail`, `name`, `price`, `number`, `creat
 CREATE TABLE `slide` (
   `id` int(10) UNSIGNED NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `h1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `h2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `p` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `h1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `h2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `p` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -324,9 +333,30 @@ CREATE TABLE `slide` (
 --
 
 INSERT INTO `slide` (`id`, `image`, `h1`, `h2`, `p`, `created_at`, `updated_at`) VALUES
-(1, 'slider1.jpg', 'E-SHOPPER', 'Free E-Commerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua. ', NULL, NULL),
-(2, 'slider2.jpg', 'E-SHOPPER', '100% Responsive Design', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL),
-(3, 'slider3.jpg', 'E-SHOPPER', 'Free Ecommerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\r\n                                        incididunt ut labore et dolore magna aliqua.', NULL, NULL);
+(1, 'slider1.jpg', 'E-SHOPPER', 'Free E-Commerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', NULL, '2017-08-23 21:42:39'),
+(2, 'slider2.jpg', 'E-SHOPPER', '100% Responsive Design', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', NULL, '2017-08-23 21:42:27'),
+(3, 'slider3.jpg', 'E-SHOPPER', 'Free Ecommerce Template', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', NULL, '2017-08-23 21:42:13'),
+(7, 'similar3.jpg', NULL, NULL, NULL, '2017-08-23 21:42:50', '2017-08-23 21:42:57');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `statuses`
+--
+
+CREATE TABLE `statuses` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `statuses`
+--
+
+INSERT INTO `statuses` (`id`, `title`) VALUES
+(-1, 'Chưa xử lý'),
+(0, 'Chờ xử lý'),
+(1, 'Đã xử lý');
 
 -- --------------------------------------------------------
 
@@ -348,8 +378,9 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `address`, `contact`, `created_at`, `updated_at`) VALUES
-(1, 'intel', 'HN', 'US', NULL, NULL),
-(2, 'grforce', 'US', 'US', NULL, NULL);
+(1, 'Intel', 'HN', 'intel@intel.net', NULL, '2017-08-23 00:53:58'),
+(2, 'Geforce', 'US', 'US', NULL, '2017-08-23 00:53:34'),
+(4, 'Test', 'Ha Noi', '0969969969', '2017-08-23 00:26:59', '2017-08-23 00:26:59');
 
 -- --------------------------------------------------------
 
@@ -359,24 +390,27 @@ INSERT INTO `suppliers` (`id`, `name`, `address`, `contact`, `created_at`, `upda
 
 CREATE TABLE `types` (
   `id` int(10) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `types`
 --
 
-INSERT INTO `types` (`id`, `name`) VALUES
-(1, 'LINH KIỆN MÁY TÍNH'),
-(2, 'MÁY TÍNH XÁCH TAY'),
-(3, 'MÁY TÍNH ĐỂ BÀN'),
-(4, 'GAMEGEAR-COOLING'),
-(5, 'GAMES NET'),
-(6, 'THIẾT BỊ NGHE NHÌN'),
-(7, 'THIẾT BỊ LƯU TRỮ'),
-(8, 'THIẾT BỊ MẠNG'),
-(9, 'THIẾT BỊ VĂN PHÒNG'),
-(10, 'THIẾT BỊ KHÁC');
+INSERT INTO `types` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'LINH KIỆN MÁY TÍNH', NULL, NULL),
+(2, 'MÁY TÍNH XÁCH TAY', NULL, NULL),
+(3, 'MÁY TÍNH ĐỂ BÀN', NULL, NULL),
+(4, 'GAMEGEAR-COOLING', NULL, NULL),
+(5, 'GAMES NET', NULL, NULL),
+(6, 'THIẾT BỊ NGHE NHÌN', NULL, NULL),
+(7, 'THIẾT BỊ LƯU TRỮ', NULL, NULL),
+(8, 'THIẾT BỊ MẠNG', NULL, NULL),
+(9, 'THIẾT BỊ VĂN PHÒNG', NULL, NULL),
+(10, 'THIẾT BỊ KHÁC', NULL, NULL),
+(11, 'Test', '2017-08-23 01:32:20', '2017-08-23 01:52:38');
 
 -- --------------------------------------------------------
 
@@ -403,10 +437,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `phone`, `created_at`, `updated_at`, `remember_token`) VALUES
 (1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '+841231231231', '2017-07-26 03:52:31', '2017-08-18 18:41:59', NULL),
-(2, 'duy', 'admin@gmail.com', '$2y$10$.TBquufVoYpGy4239QWxM.wupybL4SKyVZXbeYlWb8JyyXB72sahi', '1', 'hn', '0969969972', '2017-08-18 02:18:40', '2017-08-18 03:34:07', 'XWrAb1GNUjog43umA6N8HT0rTvbdIWvzFSSndwdnKXgqi00MqWC2ADOpE5Xt'),
-(3, 'user', 'user@gmail.com', '$2y$10$rw1ym2sIanImpn/muDoKde89xyeGzB2BxB5voa4NU6krbTie./t5a', '2', NULL, NULL, '2017-08-18 03:09:54', '2017-08-18 03:09:54', 'sl4cVmJvsprHGZdvM1xwfaTK5yf7Eb6eIq04JpNsqrK62FUNfsVONth5eyvc'),
-(5, 'qwe123', 'khanhleesin9@gmail.com', '123123', '2', 'khánh', '0969969972', '2017-08-18 20:36:51', '2017-08-18 20:37:26', NULL),
-(6, 'qwe123', 'admin@gmail.com', '123123123', '1', NULL, NULL, '2017-08-20 18:48:57', '2017-08-20 18:48:57', NULL);
+(2, 'Duy', 'admin@gmail.com', '$2y$10$.TBquufVoYpGy4239QWxM.wupybL4SKyVZXbeYlWb8JyyXB72sahi', '1', 'Tuyên Quang', '0969969972', '2017-08-18 02:18:40', '2017-08-23 04:48:34', 'DExVTJHvXpKLqUEYioq9UFS59v0OzZPj3zJk9ZvwwXfZBgqAgYKtiAYSvH3i'),
+(3, 'User', 'user@gmail.com', '$2y$10$rw1ym2sIanImpn/muDoKde89xyeGzB2BxB5voa4NU6krbTie./t5a', '2', 'HN', NULL, '2017-08-18 03:09:54', '2017-08-23 04:48:22', 'sl4cVmJvsprHGZdvM1xwfaTK5yf7Eb6eIq04JpNsqrK62FUNfsVONth5eyvc'),
+(5, 'Test', 'khanhleesin9@gmail.com', '123123', '1', 'khánh', '0969969969', '2017-08-18 20:36:51', '2017-08-23 04:48:57', NULL),
+(6, 'Anonymous', 'Anonymous@shopcomputer.com', 'anonymous123', '2', 'earth', NULL, '2017-08-23 05:58:53', '2017-08-23 05:58:53', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -479,9 +513,21 @@ ALTER TABLE `slide`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `statuses`
+--
+ALTER TABLE `statuses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `types`
+--
+ALTER TABLE `types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -498,7 +544,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT cho bảng `danhmmuc`
 --
@@ -513,7 +559,7 @@ ALTER TABLE `exports`
 -- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `images`
 --
@@ -528,12 +574,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
@@ -543,22 +589,27 @@ ALTER TABLE `order_detail`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT cho bảng `slide`
 --
 ALTER TABLE `slide`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT cho bảng `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT cho bảng `types`
+--
+ALTER TABLE `types`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
