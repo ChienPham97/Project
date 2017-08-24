@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class NewsController extends Controller
 {
@@ -12,9 +14,16 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->has('keyword')) {
+            $keyword = $request->get('keyword');
+            $news = News::where('title', 'like', '%' . $keyword . '%')->get();
+        } else {
+            $news = News::all();
+        }
+
+        return view('admin.news.show', [ 'news' => $news ]);
     }
 
     /**
@@ -24,7 +33,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create');
     }
 
     /**
@@ -35,7 +44,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $news = new News();
+        $image = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image = $file->getClientOriginalName();
+            $path = public_path('uploads/news');
+            $file->move($path, $image);
+        }
+        $news->image = $image;
+        $news->title = $request->title;
+        $news->content = $request->contents;
+        $news->save();
+        Session::flash('success', 'Create news "id = ' . $news->id . '" succesfully!');
+
+        return redirect('admin/news');
     }
 
     /**
@@ -57,7 +80,8 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $news = News::findOrFail($id);
+        return view('admin.news.edit', ['news' => $news]);
     }
 
     /**
@@ -69,7 +93,21 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $news = News::findOrFail($id);
+        $image = $news->image;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $image = $file->getClientOriginalName();
+            $path = public_path('uploads/news');
+            $file->move($path, $image);
+        }
+        $news->image = $image;
+        $news->title = $request->title;
+        $news->content = $request->contents;
+        $news->save();
+        Session::flash('success', 'Edit news "id = ' . $news->id . '" succesfully!');
+
+        return redirect('admin/news');
     }
 
     /**
@@ -80,6 +118,10 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $news = News::findOrFail($id);
+        !is_null($news->image) ? unlink('uploads/news/'.$news->image):null;
+        $news->delete();
+        Session::flash('success', 'Delete news "id = ' .  $news->id . '" succesfully!');
+        return redirect('admin/news');
     }
 }

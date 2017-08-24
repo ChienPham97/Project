@@ -16,7 +16,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
     //login va phai la admin
     Route::group(['middleware' => ['ckAdmin']], function () {    
-        Route::get('admin', 'Admin\DashboardController@index');
+        Route::get('admin', 'Admin\HomeController@index');
+        Route::get('admin/dashboard', 'Admin\DashboardController@index');
         Route::resource('admin/group', 'Admin\GroupController');
         Route::resource('admin/user', 'Admin\UserController');
         Route::resource('admin/category', 'Admin\CategoryController');

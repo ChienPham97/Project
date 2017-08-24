@@ -30,7 +30,7 @@ class UserController extends Controller
         } else {
             $users = User::all();
         }
-        return view('admin.user.show', ['users'=>$users]);
+        return view('admin.user.show', ['users' => $users]);
     }
 
     /**
@@ -40,8 +40,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $group = Group::get()->pluck('title','id');
-        return view('admin.user.create', ['group'=>$group]);
+        $groups = Group::get()->pluck('title', 'id');
+        return view('admin.user.create', ['groups' => $groups]);
     }
 
     /**
@@ -57,12 +57,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
-        $user->group_id = $request->group_id;
+        $user->group_id = $request->group;
         $user->password = $request->password;
         $user->save();
-        
+
         Session::flash('success', " Create " . $user->name . " succesfully ! ");
-        return redirect('admin/users');
+        return redirect('admin/user');
     }
 
     /**
@@ -85,8 +85,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $group = Group::get()->pluck('title','id');
-        return view('admin.user.edit', ['user' => $user,'group'=>$group]);
+        $groups = Group::get()->pluck('title', 'id');
+        return view('admin.user.edit', ['user' => $user, 'groups' => $groups]);
     }
 
     /**
@@ -103,11 +103,11 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
-        $user->group_id = $request->group_id;
+        $user->group_id = $request->group;
         $user->save();
         Session::flash('success', "Edit \"" . $user->name . "\" successfully!!!");
 
-        return redirect('admin/users');
+        return redirect('admin/user');
     }
 
     /**
@@ -121,6 +121,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         Session::flash('success', "Delete " . $user->name . " succesfully");
         $user->delete();
-        return redirect('admin/users');
+        return redirect('admin/user');
     }
 }

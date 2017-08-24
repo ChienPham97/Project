@@ -21,9 +21,7 @@ class CategoryController extends Controller
         }
        
         $types = Type::get()->pluck('title','id');
-        return view('admin.category.show', [
-            'category' => $categories      
-        ]);
+        return view('admin.category.show', [ 'category' => $categories ]);
     }
 
     /**
@@ -33,7 +31,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $types = Type::get()->pluck('name','id');
+        return view('admin.category.create', ['types'=>$types]);
     }
 
     /**
@@ -44,14 +43,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $c = new Category();
-        $c->title = $request->title;
-        $c->type_id = $request->type_id;
-        $c->save();
-        Session::flash('success', " Create " . $c->title . " succesfully ! ");
+        $category = new Category();
+        $category->title = $request->title;
+        $category->type_id = $request->type;
+        $category->save();
+        Session::flash('success', ' Create category "' . $category->title . '" succesfully!');
 
         return redirect('admin/category');
-
     }
 
     /**
@@ -73,9 +71,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $cate = Category::findOrFail($id);
-
-        return view('admin.category.edit', ['cate' => $cate]);
+        $category = Category::findOrFail($id);
+        $types = Type::get()->pluck('name','id');
+        return view('admin.category.edit', ['category' => $category, 'types' => $types]);
     }
 
     /**
@@ -87,11 +85,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cate = Category::findOrFail($id);
-        $cate->title = $request->title;
-        $cate->type_id = $request->type_id;
-        $cate->save();
-        Session::flash('success', "Edit " . $cate->title . " successfully!!!");
+        $category = Category::findOrFail($id);
+        $category->title = $request->title;
+        $category->type_id = $request->type;
+        $category->save();
+        Session::flash('success', 'Edit category "' . $category->title . '" successfully!');
 
         return redirect('admin/category');
     }
@@ -100,14 +98,13 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\ResponseW
      */
     public function destroy($id)
     {
-
-        $cate = Category::findOrFail($id);
-        Session::flash('success', "Delete " . $cate->title . " succesfully");
-        $cate->delete();
+        $category = Category::findOrFail($id);
+        Session::flash('success', 'Delete category "' . $category->title . '" succesfully!');
+        $category->delete();
 
         return redirect('admin/category');
     }

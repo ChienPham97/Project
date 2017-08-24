@@ -22,9 +22,9 @@ class ProductController extends Controller
     {
         if ($request->has('keyword')) {
             $keyword = $request->get('keyword');
-            $products = Product::with('category')->where('name', 'like', '%' . $keyword . '%')->get();
+            $products = Product::with('category')->where('name', 'like', '%' . $keyword . '%')->paginate(5);
         } else {
-            $products = Product::with('category')->get();
+            $products = Product::with('category')->paginate(5);
         }
         //dd($products);
         return view('admin.product.show', compact('products'));
@@ -42,23 +42,23 @@ class ProductController extends Controller
     
     public function store(Request $request)
     {
-        $thumbnail = 'no-image.jpg';
+        $product = new Product();
+        $thumbnail = null;
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $thumbnail = $file->getClientOriginalName();
             $path = public_path('uploads/product');
             $file->move($path, $thumbnail);
         }
-        $product = new Product();
         $product->name = $request->name;
         $product->thumbnail = $thumbnail;
-        $product->category_id = $request->category_id;
+        $product->category_id = $request->category;
         $product->price = $request->price;
         $product->sale = $request->sale;
         $product->inventorynumber = $request->inventorynumber;
         $product->des = $request->des;
         $product->save();
-        Session::flash('success', " Create " .  $product->name . " succesfully ! ");
+        Session::flash('success', 'Create Product "' .  $product->name . '" succesfully!');
 
         return redirect('admin/product');
     }
@@ -96,6 +96,7 @@ class ProductController extends Controller
      */
     public function update(ProductEditRequest $request, $id)
     {
+        $product = Product::findOrFail($id);
         $thumbnail = $product->thumbnail;
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
@@ -103,16 +104,15 @@ class ProductController extends Controller
             $path = public_path('uploads/product');
             $file->move($path, $thumbnail);
         }
-        $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->thumbnail = $thumbnail;
-        $product->category_id = $request->category_id;
+        $product->category_id = $request->category;
         $product->price = $request->price;
         $product->sale = $request->sale;
         $product->inventorynumber = $request->inventorynumber;
         $product->des = $request->des;
         $product->save();
-        Session::flash('success', "Edit " . $product->name . " successfully!!!");
+        Session::flash('success', 'Edit Product "' . $product->name . '" successfully!');
 
         return redirect('admin/product');
     }
@@ -128,7 +128,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         unlink('uploads/product/'.$product->thumbnail);
         $product->delete();
-        Session::flash('success', "Delete " .  $product->name . " succesfully");
+        Session::flash('success', 'Delete Product "' .  $product->name . '" succesfully!');
         return redirect('admin/product');
     }
 }

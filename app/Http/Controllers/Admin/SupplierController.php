@@ -18,11 +18,14 @@ class SupplierController extends Controller
 
     public function index(Request $request)
     {
-        $suppliers = Supplier::all();
+        if ($request->has('keyword')) {
+            $keyword = $request->get('keyword');
+            $suppliers = Supplier::where('name', 'like', '%' . $keyword . '%')->get();
+        } else {
+            $suppliers = Supplier::all();
+        }
 
-        return view('admin.supplier.show', [
-            'abc' => $suppliers
-        ]);
+        return view('admin.supplier.show', [ 'suppliers' => $suppliers ]);
     }
 
     /**
@@ -32,7 +35,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-
+        return view('admin.supplier.create');
     }
 
     /**
@@ -43,8 +46,14 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
+        $supplier = new Supplier();
+        $supplier->name = $request->name;
+        $supplier->address = $request->address;
+        $supplier->contact = $request->contact;
+        $supplier->save();
+        Session::flash('success', ' Create supplier "' . $supplier->name . '" succesfully!');
 
-
+        return redirect('admin/supplier');
     }
 
     /**
@@ -66,7 +75,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-
+        $supplier = Supplier::findOrFail($id);
+        return view('admin.supplier.edit', ['supplier' => $supplier]);
     }
 
     /**
@@ -78,7 +88,14 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $supplier = Supplier::findOrFail($id);
+        $supplier->name = $request->name;
+        $supplier->address = $request->address;
+        $supplier->contact = $request->contact;
+        $supplier->save();
+        Session::flash('success', 'Edit supplier "' . $supplier->name . '" successfully!');
 
+        return redirect('admin/supplier');
     }
 
     /**
@@ -89,7 +106,10 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
+        $supplier = Supplier::findOrFail($id);
+        Session::flash('success', 'Delete supplier "' . $supplier->name . '" succesfully!');
+        $supplier->delete();
 
-
+        return redirect('admin/supplier');
     }
 }

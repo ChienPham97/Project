@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Type;
@@ -16,9 +17,7 @@ class TypeController extends Controller
     public function index()
     {
         $types = Type::all();
-        return view('admin.type.show', [
-            'types' => $types
-        ]);
+        return view('admin.type.show', [ 'types' => $types ]);
     }
 
     /**
@@ -28,7 +27,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.type.create');
     }
 
     /**
@@ -39,7 +38,12 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = new Type();
+        $type->name = $request->name;
+        $type->save();
+        Session::flash('success', 'Create type "' . $type->name . '" succesfully!');
+
+        return redirect('admin/type');
     }
 
     /**
@@ -61,7 +65,8 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $type = Type::findOrFail($id);
+        return view('admin.type.edit', ['type' => $type]);
     }
 
     /**
@@ -73,7 +78,12 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $type = Type::findOrFail($id);
+        $type->name = $request->name;
+        $type->save();
+        Session::flash('success', 'Edit type "' . $type->name . '" successfully!');
+
+        return redirect('admin/type');
     }
 
     /**
@@ -84,6 +94,10 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $type = Type::findOrFail($id);
+        Session::flash('success', 'Delete type "' . $type->name . '" succesfully!');
+        $type->delete();
+
+        return redirect('admin/type');
     }
 }

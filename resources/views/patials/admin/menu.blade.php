@@ -38,7 +38,7 @@
 
     <ul class="nav nav-list">
         <li class="">
-            <a href="{{ url('admin') }}">
+            <a href="{{ url('admin/dashboard') }}">
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Dashboard </span>
                 <b class="arrow"></b>
@@ -77,7 +77,7 @@
         </li>
         
         <li class="">
-            <a href="{{ url('admin/export') }}">
+            <a href="{{ url('admin/supplier') }}">
                 <i class="menu-icon fa fa-phone-square"></i>
                 <span class="menu-text"> Suppliers </span>
             </a>
@@ -98,7 +98,7 @@
         </li>
         
         <li class="">
-            <a href="{{ url('admin/new') }}">
+            <a href="{{ url('admin/news') }}">
                 <i class="menu-icon fa fa-newspaper-o"></i>
                 <span class="menu-text"> News </span>
             </a>

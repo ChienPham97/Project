@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Group;
+use Session;
 
 class GroupController extends Controller
 {
@@ -15,10 +16,13 @@ class GroupController extends Controller
      */
     public function index(Request $request)
     {
-        $groups = Group::all();
-        return view('admin.group.show', [
-            'groups' => $groups
-        ]);
+        if ($request->has('keyword')) {
+            $keyword = $request->get('keyword');
+            $groups = Group::where('title', 'like', '%' . $keyword . '%')->get();
+        } else {
+            $groups = Group::all();
+        }
+        return view('admin.group.show', [ 'groups' => $groups ]);
     }
 
     /**
@@ -28,7 +32,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.group.create');
     }
 
     /**
@@ -39,7 +43,12 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = new Group();
+        $group->title = $request->title;
+        $group->save();
+        Session::flash('success', 'Create group "' . $group->title . '" succesfully!');
+
+        return redirect('admin/group');
     }
 
     /**
@@ -61,7 +70,8 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = Group::findOrFail($id);
+        return view('admin.group.edit', ['group' => $group]);
     }
 
     /**
@@ -73,7 +83,12 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = Group::findOrFail($id);
+        $group->title = $request->title;
+        $group->save();
+        Session::flash('success', 'Edit group "' . $group->title . '" successfully!');
+
+        return redirect('admin/group');
     }
 
     /**
@@ -84,6 +99,10 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = Group::findOrFail($id);
+        Session::flash('success', 'Delete group "' . $group->title . '" succesfully!');
+        $group->delete();
+
+        return redirect('admin/group');
     }
 }
