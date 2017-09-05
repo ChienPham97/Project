@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('admin/supplier', 'Admin\SupplierController');
         Route::resource('admin/type', 'Admin\TypeController');
         Route::resource('admin/order', 'Admin\OrderController');
+        Route::resource('admin/order-detail', 'Admin\OrderDetailController');
         Route::resource('admin/news', 'Admin\NewsController');
         Route::resource('admin/export', 'Admin\ExportController');
         Route::resource('admin/slide', 'Admin\SlideController');

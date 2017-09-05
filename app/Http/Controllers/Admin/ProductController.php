@@ -40,7 +40,7 @@ class ProductController extends Controller
         return view('admin.product.create', ['categories'=> $this->_categories]);
     }
     
-    public function store(Request $request)
+    public function store(ProductEditRequest $request)
     {
         $product = new Product();
         $thumbnail = null;
@@ -126,7 +126,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        unlink('uploads/product/'.$product->thumbnail);
+        is_null($product->thumbnail)? null: unlink('uploads/product/'.$product->thumbnail);
         $product->delete();
         Session::flash('success', 'Delete Product "' .  $product->name . '" succesfully!');
         return redirect('admin/product');

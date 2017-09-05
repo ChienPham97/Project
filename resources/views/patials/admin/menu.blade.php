@@ -96,6 +96,13 @@
                 <span class="menu-text"> Orders </span>
             </a>
         </li>
+
+        <li class="">
+            <a href="{{ url('admin/order-detail') }}">
+                <i class="menu-icon fa fa-info-circle"></i>
+                <span class="menu-text"> Order detail </span>
+            </a>
+        </li>
         
         <li class="">
             <a href="{{ url('admin/news') }}">
