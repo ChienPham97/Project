@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin.layout')
 @section('title') Edit Export Invoice @endsection
 @section('content')
     <div class="main-content">

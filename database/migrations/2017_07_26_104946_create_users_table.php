@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
 			$table->string('group_id');
 			$table->string('address');
 			$table->string('phone');
+            $table->string('remember_token');
             $table->timestamps();
         });
     }

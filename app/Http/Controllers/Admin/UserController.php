@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Users;
+use App\User;
+use App\Group;
 use Session;
+use App\Http\Requests\UserCreateRequests;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $_groups = [];
 
+    public function __construct()
+    {
+        $groups = Group::all();
+        foreach ($groups as $group) {
+            $this->_groups[$group->id] = $group->title;
+        }
+    }
 
     public function index(Request $request)
     {
@@ -24,11 +28,9 @@ class UserController extends Controller
             $keyword = $request->get('keyword');
             $users = User::where('name', 'like', '%' . $keyword . '%')->get();
         } else {
-            $users = Users::all();
+            $users = User::all();
         }
-        return view('admin.users.show', [
-            'abc' => $users
-        ]);
+        return view('admin.user.show', ['users' => $users]);
     }
 
     /**
@@ -38,7 +40,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $groups = Group::get()->pluck('title', 'id');
+        return view('admin.user.create', ['groups' => $groups]);
     }
 
     /**
@@ -47,18 +50,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequests $request)
     {
-        $c = new Users();
-        $c->name = $request->name;
-        $c->address = $request->address;
-        $c->phone = $request->phone;
-        $c->group_id = $request->group_id;
-        $c->save();
-        Session::flash('success', " Create " . $c->name . " succesfully ! ");
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->group_id = $request->group;
+        $user->password = $request->password;
+        $user->save();
 
-        return redirect('admin/users');
-
+        Session::flash('success', " Create " . $user->name . " succesfully ! ");
+        return redirect('admin/user');
     }
 
     /**
@@ -80,9 +84,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $cate = Users::findOrFail($id);
-
-        return view('admin.users.edit', ['cate' => $cate]);
+        $user = User::findOrFail($id);
+        $groups = Group::get()->pluck('title', 'id');
+        return view('admin.user.edit', ['user' => $user, 'groups' => $groups]);
     }
 
     /**
@@ -94,15 +98,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cate = Users::findOrFail($id);
-        $cate->name = $request->name;
-        $cate->address = $request->address;
-        $cate->phone = $request->phone;
-        $cate->group_id = $request->group_id;
-        $cate->save();
-        Session::flash('success', "Edit " . $cate->name . " successfully!!!");
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->group_id = $request->group;
+        $user->save();
+        Session::flash('success', "Edit \"" . $user->name . "\" successfully!!!");
 
-        return redirect('admin/users');
+        return redirect('admin/user');
     }
 
     /**
@@ -113,11 +118,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
-        $cate = Users::findOrFail($id);
-        Session::flash('success', "Delete " . $cate->name . " succesfully");
-        $cate->delete();
-
-        return redirect('admin/users');
+        $user = User::findOrFail($id);
+        Session::flash('success', "Delete " . $user->name . " succesfully");
+        $user->delete();
+        return redirect('admin/user');
     }
 }

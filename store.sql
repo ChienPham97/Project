@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 03, 2017 lúc 06:29 SA
+-- Thời gian đã tạo: Th8 18, 2017 lúc 05:33 CH
 -- Phiên bản máy phục vụ: 10.1.21-MariaDB
 -- Phiên bản PHP: 5.6.30
 
@@ -119,7 +119,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2017_07_26_104946_create_users_table', 5),
 (13, '2017_08_01_094803_create_slider_tables', 6),
 (14, '2017_08_01_100050_create_slide_tables', 7),
-(15, '2017_08_02_030308_create_danhmuc_tables', 8);
+(15, '2017_08_02_030308_create_danhmuc_tables', 8),
+(16, '2017_08_09_093956_create_shoppingcart_table', 9),
+(17, '2017_08_18_135238_create_tables_order', 10),
+(18, '2017_08_18_142516_create_tables_order_details', 10);
 
 -- --------------------------------------------------------
 
@@ -129,11 +132,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `news` (
   `id` int(10) UNSIGNED NOT NULL,
-  `image_id` int(11) NOT NULL,
-  `content` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `news`
+--
+
+INSERT INTO `news` (`id`, `image`, `title`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'khaitruong.jpg', 'KHAI TRƯƠNG TƯNG BỪNG', 'Cửa hàng khai trương - khuyến mãi tưng bừng\r\n\r\n100 quà tặng dành cho khách hàng đến mua sản phẩm của cửa hàng đầu tiên !', NULL, NULL),
+(2, 'sale.jpg', 'KHUYẾN MÃI CỰC KHỦNG', 'Khuyến mãi 15% cho tất cả các mặt hàng !', NULL, NULL),
+(3, 'baotri.jpg', 'Bảo trì Website', 'Bảo trì Website từ ngày 9/8 đến 10/8', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,15 +213,17 @@ CREATE TABLE `users` (
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `phone`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '', '2017-07-26 03:52:31', '2017-07-26 03:52:31');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `group_id`, `address`, `phone`, `created_at`, `updated_at`, `remember_token`) VALUES
+(1, 'admin', 'admin@shop0317e.com', '$2y$10$apNPPIp2uYSmkl1FmyWbd.dAOmeVLhvWrjxHu5MRA4qdv5fcz1lmK', '1', 'admin', '', '2017-07-26 03:52:31', '2017-07-26 03:52:31', 'O2HhkZDVFNU8CNHAhfExyXs4xCk6XKByvTZBQ01QQIOe3HZFQD0pK7asWJn0'),
+(2, 'Phạm Minh Chiến', 'minhchienpham97@gmail.com', '$2y$10$Cbn4qvBRn3ObcxCLqUaJkeGsuQv51p4mmjQiZeHn9WXSscLyc4SNG', '2', NULL, NULL, '2017-08-17 08:51:48', '2017-08-17 08:51:48', 'WyDEpaQ9rVBHYF24oXw1nzDtUDKGCcjMW6RQXXlq6u2bxbTcFKjz781nWgXb');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -285,12 +300,12 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT cho bảng `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
@@ -305,7 +320,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
