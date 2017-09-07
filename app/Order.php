@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = "orders";
-	
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');
@@ -15,8 +14,5 @@ class Order extends Model
     public function status()
     {
         return $this->belongsTo('App\Status', 'status');
-    }
-    public function Supplier(){
-        return $this->belongsTo('App\Supplier');
     }
 }

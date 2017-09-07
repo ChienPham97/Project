@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Type;
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Session;
+use App\Type;
 
 class TypeController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        if ($request->has('keyword')) {
-
-            $keyword = $request->get('keyword');
-            $types = Type::where('title', 'like', '%' . $keyword . '%')->get();
-        } else {
-            $types = Type::all();
-        }
-        return view('admin.type.show', compact('types'));
+        $types = Type::all();
+        return view('admin.type.show', [ 'types' => $types ]);
     }
 
     /**
@@ -34,19 +33,15 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-<<<<<<< HEAD
-     * @param  \Illuminate\Http\Request $request
-=======
      * @param  \Illuminate\Http\Request  $request
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $types = new Type();
-        $types->title = $request->title;
-        $types->save();
-        Session::flash('success', " Create " . $types->title . " succesfully ! ");
+        $type = new Type();
+        $type->name = $request->name;
+        $type->save();
+        Session::flash('success', 'Create type "' . $type->name . '" succesfully!');
 
         return redirect('admin/type');
     }
@@ -54,11 +49,7 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      *
-<<<<<<< HEAD
-     * @param  int $id
-=======
      * @param  int  $id
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,11 +60,7 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-<<<<<<< HEAD
-     * @param  int $id
-=======
      * @param  int  $id
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,21 +72,16 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-<<<<<<< HEAD
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-=======
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $types = Type::findOrFail($id);
-        $types->title = $request->title;
-        $types->save();
-        Session::flash('success', "Edit " . $types->title . " successfully!!!");
+        $type = Type::findOrFail($id);
+        $type->name = $request->name;
+        $type->save();
+        Session::flash('success', 'Edit type "' . $type->name . '" successfully!');
 
         return redirect('admin/type');
     }
@@ -107,18 +89,14 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-<<<<<<< HEAD
-     * @param  int $id
-=======
      * @param  int  $id
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $types = Type::findOrFail($id);
-        Session::flash('success', "Delete " . $types->title . " succesfully");
-        $types->delete();
+        $type = Type::findOrFail($id);
+        Session::flash('success', 'Delete type "' . $type->name . '" succesfully!');
+        $type->delete();
 
         return redirect('admin/type');
     }

@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         return view('admin.product.create', ['categories'=> $this->_categories]);
     }
-	
+    
     public function store(ProductEditRequest $request)
     {
         $product = new Product();

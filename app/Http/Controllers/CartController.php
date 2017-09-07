@@ -16,8 +16,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('cart.index', compact('product'));
+        return view('cart.index');
     }
 
     /**
@@ -40,35 +39,17 @@ class CartController extends Controller
     {
         $product = Product::where('id', $id)->first();
         if (isset($product->id)) {
-            if($product->sale == 0){
-
-                Cart::add([
-                    [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'qty' => 1,
-                        'price' => $product->price,
-                        'options' => [
-                            'thumbnail' => $product->thumbnail
-                        ]
+            Cart::add([
+                [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'qty' => 1,
+                    'price' => $product->price,
+                    'options' => [
+                        'thumbnail' => $product->thumbnail
                     ]
-                ]);
-
-            }
-            else{
-                Cart::add([
-                    [
-                        'id' => $product->id,
-                        'name' => $product->name,
-                        'qty' => 1,
-                        'price' => $product->sale,
-                        'options' => [
-                            'thumbnail' => $product->thumbnail
-                        ]
-                    ]
-                ]);
-            }
-
+                ]
+            ]);
             /*Cart::add($product->id, $product->title, 1, $product->price, [
                 'thumbnail' => $product->thumbnail
             ]);*/
@@ -122,15 +103,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        if ($product->id != null) {
-            foreach (Cart::content() as $key => $item) {
-                if ($item->id == $product->id) {
-                    Cart::remove($key);
-                    break;
-                }
-            }
-        }
-        return redirect()->back();
+        Cart::destroy();
+
+
     }
 }

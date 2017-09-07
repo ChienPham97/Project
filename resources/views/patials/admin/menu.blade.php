@@ -96,29 +96,7 @@
                 <span class="menu-text"> Orders </span>
             </a>
         </li>
-        
-        <li class="">
-            <a href="{{ url('admin/type') }}">
-                <i class="menu-icon fa fa-check-square-o"></i>
-                <span class="menu-text"> Types </span>
-            </a>
-        </li>
-        
-        <li class="">
-            <a href="{{ url('admin/order') }}">
-                <i class="menu-icon fa fa-pencil-square-o"></i>
-                <span class="menu-text"> Orders </span>
-            </a>
-        </li>
-        
-        <li class="">
-            <a href="{{ url('admin/news') }}">
-                <i class="menu-icon fa fa-newspaper-o"></i>
-                <span class="menu-text"> News </span>
-            </a>
-        </li>
-        
-        
+
         <li class="">
             <a href="{{ url('admin/order-detail') }}">
                 <i class="menu-icon fa fa-info-circle"></i>

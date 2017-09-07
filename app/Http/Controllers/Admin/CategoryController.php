@@ -31,7 +31,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $types = Type::get()->pluck('name','id');
+        $types = Type::get()->pluck('title','id');
+		
         return view('admin.category.create', ['types'=>$types]);
     }
 
