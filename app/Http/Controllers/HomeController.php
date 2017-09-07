@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Category;
 use App\News;
 use App\Order;
@@ -14,6 +15,13 @@ use Session;
 use Auth;
 use Cart;
 
+=======
+use App\News;
+use App\Cart;
+use App\Product;
+use App\Slide;
+use Session;
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
 use Illuminate\Http\Request;
 
 
@@ -34,7 +42,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $slider = Slide::all();
+        $product = Product::where('inventorynumber', '<', '35')->paginate(8);
+        $new_product = Product::where('des', 'new')->paginate(8);
+        $sale_product = Product::where('sale', '<>', '0')->paginate(8);
+        $buy_product = Product::where('inventorynumber', '<', '15')->paginate(8);
+        $fav_product = Product::where('favorite', '<>', '0')->get();
+        return view('page.home', compact('slider', 'product', 'new_product', 'sale_product', 'buy_product', 'fav_product'));
+    }
 
+<<<<<<< HEAD
         $slider = Slide::all();
         $product = Product::where('inventorynumber', '<', '35')->paginate(8);
         $new_product = Product::where('des', 'new')->paginate(8);
@@ -57,6 +74,13 @@ class HomeController extends Controller
         $other = Product::where('category_id' ,'<>',$category_id)->paginate(8);
          $cate = Category::where('id',$category_id)->first();
         return view('page.product_type', compact('product','cate','other'));
+=======
+    public function ProductType()
+    {
+        $new_product = Product::where('des', 'new')->paginate(8);
+        $d_product = Product::where('inventorynumber', '<', 16)->where('inventorynumber', '>', 0)->paginate(8);
+        return view('page.product_type', compact('new_product', 'd_product'));
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
     }
 
     public function ProductDetail(Request $request)
@@ -66,6 +90,7 @@ class HomeController extends Controller
 
         return view('page.product_detail', compact('detail'));
     }
+<<<<<<< HEAD
 
     public function News()
     {
@@ -165,6 +190,19 @@ class HomeController extends Controller
     {
         Auth::logout();
         return redirect('home');
+=======
 
+    public function getNews()
+    {
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
+
+        $new = News::all();
+        return view('page.news', compact('new'));
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
 }

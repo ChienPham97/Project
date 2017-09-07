@@ -35,7 +35,11 @@
                 <div class="col-sm-4">
                     <div class="logo pull-left">
                         <a href="{{ url('home') }}"><img src="{{ asset('source/images/home/logo.png') }}"
+<<<<<<< HEAD:resources/views/layouts/header.blade.php
                                                          alt=""></a>
+=======
+                                                                                    alt=""></a>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/layouts/header.blade.php
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -46,10 +50,16 @@
                             @endif
                             <li><a href="{{url('cart')}}"><i class="fa fa-crosshairs"></i> Kiểm Tra Đơn Hàng</a></li>
                             @if(Auth::check())
+<<<<<<< HEAD:resources/views/layouts/header.blade.php
                                 <li><a href="{{url('logout')}}"><i class="fa fa-out"></i> Đăng Xuất</a></li>
                             @else
                                 <li><a href="{{url('login')}}"><i class="fa fa-lock"></i> Đăng Nhập</a></li>
                                 <li><a href="{{url('register')}}"><i class="fa fa-user"></i>Đăng Kí</a></li>
+=======
+                                <li><a href="{{url('logout')}}"><i class="fa fa-lock"></i>Đăng Xuất</a></li>
+                            @else
+                                <li><a href="{{url('login')}}"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/layouts/header.blade.php
                             @endif
                         </ul>
                     </div>
@@ -77,10 +87,13 @@
                             <li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ url('cart') }}">Kiểm Tra Đơn Hàng</a></li>
-                                    <li><a href="{{ url('login') }}">Đăng Nhập</a></li>
                                 </ul>
                             </li>
+<<<<<<< HEAD:resources/views/layouts/header.blade.php
                             <li><a href="{{ url('news') }}">Tin Tức</a></li>
+=======
+                            <li><a href="{{ url('news') }}">Khuyến Mãi</a></li>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/layouts/header.blade.php
                             <li><a href="{{ url('contact') }}">Trung Tâm Bảo Hành</a></li>
                         </ul>
                     </div>
@@ -97,11 +110,15 @@
                                         <?php $total = 0; ?>
                                         @if(Cart::content())
                                             @foreach(Cart::content() as $item)
+<<<<<<< HEAD:resources/views/layouts/header.blade.php
                                                 @if($item->sale == 0)
                                                     <?php $total = $total + $item->price * $item->qty; ?>
                                                 @else
                                                     <?php $total = $total + $item->sale * $item->qty; ?>
                                                 @endif
+=======
+                                                <?php $total = $total + $item->price*$item->qty; ?>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/layouts/header.blade.php
                                             @endforeach
                                         @endif
                                         {{ number_format($total) }}

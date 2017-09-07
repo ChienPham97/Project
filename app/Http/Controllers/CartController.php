@@ -40,6 +40,7 @@ class CartController extends Controller
     {
         $product = Product::where('id', $id)->first();
         if (isset($product->id)) {
+<<<<<<< HEAD
             if($product->sale == 0){
 
                 Cart::add([
@@ -65,6 +66,16 @@ class CartController extends Controller
                         'options' => [
                             'thumbnail' => $product->thumbnail
                         ]
+=======
+            Cart::add([
+                [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'qty' => 1,
+                    'price' => $product->price,
+                    'options' => [
+                        'thumbnail' => $product->thumbnail
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                     ]
                 ]);
             }
@@ -122,6 +133,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
 
         $product = Product::findOrFail($id);
         if ($product->id != null) {
@@ -133,6 +145,10 @@ class CartController extends Controller
             }
         }
         return redirect()->back();
+=======
+        Cart::destroy();
+
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
 
     }
 }

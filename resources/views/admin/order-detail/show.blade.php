@@ -1,5 +1,5 @@
 @extends('layouts.admin.layout')
-@section('title') Types | Shop Computer @endsection
+@section('title') Order detail | Shop Computer @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -11,33 +11,37 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/type') }}">Types</a>
+                        <a href="{{ url('admin/order-detail') }}">Order detail</a>
                     </li>
-
                 </ul><!-- /.breadcrumb -->
-
+                {!! Form::open(['method' => 'GET', 'url' => 'admin/order-detail']) !!}
                 <div class="nav-search" id="nav-search">
-                    {!! Form::open(['method' => 'GET', 'url' => 'admin/type', 'class' => 'form-search']) !!}
-                    <span class="input-icon">
-                        {!! Form::text('keyword', Request::has('keyword') ? Request::get('keyword'): null, ['class' => 'nav-search-input', 'placeholder' => 'Search ...']) !!}
-                        <i class="ace-icon fa fa-search nav-search-icon"></i>
-                        <button type="submit">Search</button>
-                    </span>
-                    {!! Form::close() !!}
-                </div><!-- /.nav-search -->
+                    <form class="form-search">
+                        <span class="input-icon">
+                            <input type="text"
+                                name="keyword"
+                                @if(Request::has('keyword'))
+                                value="{{ Request::get('keyword') }}"
+                                @endif
+                                class="nav-search-input"
+                                id="nav-search-input"
+                                placeholder="Search ..."
+                            />
+                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                            <button type="submit" id="btnSearch">Search</button>
+                        </span>
+                    </form>
+                </div>
+                <!-- /.nav-search -->
+                {!! Form::close() !!}
             </div>
 
             <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
-                @include('patials.admin.ace-settings')<!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
+
 
                 <div class="page-header">
                     <h1>
-                        Type List
+                        order-detail List
                     </h1>
                 </div><!-- /.page-header -->
 
@@ -46,6 +50,7 @@
                         <button type="button" class="close" data-dismiss="alert">
                             <i class="ace-icon fa fa-times"></i>
                         </button>
+
                         <p>
                             <strong>
                                 <i class="ace-icon fa fa-check"></i>
@@ -55,13 +60,14 @@
                     </div>
                 @endif
                 <div class="row">
-                    <a href="{{ url('admin/type/create') }}" style="font-size: 15px ; margin-left: 15px">Create New</a>
+                    <a href="{{ url('admin/order-detail/create') }}" style="font-size: 15px ; margin-left: 15px">Create
+                        New</a>
                     <br/><br/>
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <div class="row">
                             <div class="col-xs-12">
-                                <table id="simple-table" class="table  table-bordered table-hover">
+                                <table id="simple-table" class="table  table-border-detailed table-hover">
                                     <thead>
                                     <tr>
                                         <th class="center">
@@ -71,26 +77,25 @@
                                             </label>
                                         </th>
                                         <th class="detail-col">ID</th>
-                                        <th class="hidden-480">Name</th>
-                                        <th>Action</th>
+                                        <th class="hidden-480">Order Id</th>
+                                        <th>Product</th>
+                                        <th>Price</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if($types)
-                                        @foreach($types as $item)
+                                    @if($order_detail)
+                                        @foreach($order_detail as $item)
                                             <tr>
                                                 <td>
                                                     <input type="checkbox"/>
                                                 </td>
                                                 <td>{{ $item->id }}</td>
-<<<<<<< HEAD
-                                                <td>{{ $item->title }}</td>
-=======
-                                                <td>{{ $item->name }}</td>
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
+                                                <td>{{ $item->order_id }}</td>
+                                                <td>{{ $item->product_name }}</td>
+                                                <td>{{ $item->price }}</td>
                                                 <td>
-                                                    {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/type/'.$item->id,'role'=>'from' ]) !!}
-                                                    <a href="{{ url('admin/type/'.$item->id.'/edit') }}"
+                                                    {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/order-detail/'.$item->id,'role'=>'from' ]) !!}
+                                                    <a href="{{ url('admin/order-detail/'.$item->id.'/edit') }}"
                                                        class="btn">Edit</a>
                                                     <button type="submit" value="DELETE" class="btn btn-danger"
                                                             onclick="return confirm('Are you sure?');">Delete

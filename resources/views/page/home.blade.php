@@ -17,7 +17,10 @@
                                 <div class="item">
 
                                     <div class="col-sm-12">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                         <img src="uploads/slider/{{ $item->image }}" class="girl img-responsive"
                                              alt="">
                                     </div>
@@ -56,6 +59,7 @@
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
+<<<<<<< HEAD
                                 @if($item->des == "new")
                                     <img src="{{asset('source/images/product-details/new.jpg')}}"
                                          style="width: 33px; height: 19px;"
@@ -71,11 +75,23 @@
                                 <p>{{ $item->name }}</p>
                                 <a href="{{ url('cart/add/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
                                     Thêm Vào Giỏ</a>
+=======
+                                <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                <h2>{{ number_format($item->price) }}</h2>
+                                <p>{{ $item->name }}</p>
+                                <a href="{{ url('product_detail/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                                    Chi Tiết Sản Phẩm</a>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </div>
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
+<<<<<<< HEAD
                                 <li><a href="{{ url('product_detail/'.$item->id) }}"><i class="fa fa-plus-square"></i>Chi Tiết Sản Phẩm</a></li>
+=======
+                                <li><a href="#"><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
+                                <li><a href="{{ url('cart/add/'.$item->id) }}"><i class="fa fa-plus-square"></i>Thêm Vào Giỏ</a></li>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </ul>
                         </div>
                     </div>
@@ -102,6 +118,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
+<<<<<<< HEAD
                                         @if($item->des == "new")
                                             <img src="{{asset('source/images/product-details/new.jpg')}}"
                                                  style="width: 33px; height: 19px;"
@@ -117,11 +134,23 @@
                                         <p>{{ $item->name }}</p>
                                         <a href="{{ url('cart/add/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
                                             Thêm Vào Giỏ</a>
+=======
+                                        <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                        <h2>{{ number_format($item->price) }}</h2>
+                                        <p>{{ $item->name }}</p>
+                                        <a href="{{ url('product_detail/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                                            Chi Tiết Sản Phẩm</a>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                     </div>
                                 </div>
                                 <div class="choose">
                                     <ul class="nav nav-pills nav-justified">
+<<<<<<< HEAD
                                         <li><a href="{{ url('product_detail/'.$item->id) }}"><i class="fa fa-plus-square"></i>Chi Tiết Sản Phẩm</a></li>
+=======
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Yêu Thích</a></li>
+                                        <li><a href="{{ url('cart/add/'.$item->id) }}"><i class="fa fa-plus-square"></i>Thêm Vào Giỏ</a></li>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                     </ul>
                                 </div>
                             </div>
@@ -136,6 +165,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
+<<<<<<< HEAD
                                         @if($item->des == "new")
                                             <img src="{{asset('source/images/product-details/new.jpg')}}"
                                                  style="width: 33px; height: 19px;"
@@ -151,6 +181,11 @@
                                         <p>{{ $item->name }}</p>
                                         <a href="{{ url('cart/add/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
                                             Thêm Vào Giỏ</a>
+=======
+                                        <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                        <h2>{{ number_format($item->price) }}</h2>
+                                        <p>{{ $item->name }}</p>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                     </div>
                                 </div>
                                 <div class="choose">
@@ -169,6 +204,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
+<<<<<<< HEAD
                                         @if($item->des == "new")
                                             <img src="{{asset('source/images/product-details/new.jpg')}}"
                                                  style="width: 33px; height: 19px;"
@@ -184,6 +220,11 @@
                                         <p>{{ $item->name }}</p>
                                         <a href="{{ url('cart/add/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
                                             Thêm Vào Giỏ</a>
+=======
+                                        <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                        <h2>{{ number_format($item->price) }}</h2>
+                                        <p>{{ $item->name }}</p>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                     </div>
                                 </div>
                                 <div class="choose">
@@ -203,6 +244,7 @@
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
+<<<<<<< HEAD
                                         @if($item->des == "new")
                                             <img src="{{asset('source/images/product-details/new.jpg')}}"
                                                  style="width: 33px; height: 19px;"
@@ -218,6 +260,11 @@
                                         <p>{{ $item->name }}</p>
                                         <a href="{{ url('cart/add/'.$item->id) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
                                             Thêm Vào Giỏ</a>
+=======
+                                        <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                        <h2>{{ number_format($item->price) }}</h2>
+                                        <p>{{ $item->name }}</p>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                     </div>
                                 </div>
                                 <div class="choose">
@@ -240,6 +287,7 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         @foreach($fav_product as $item)
+<<<<<<< HEAD
                             <div class="col-sm-3">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
@@ -256,6 +304,14 @@
                                             @endif
                                             <img src="uploads/product/{{ $item->thumbnail }}" alt="">
                                             <h2>@if($item->sale == 0){{ number_format($item->price)}} @else {{ number_format($item->sale)}}  @endif</h2>
+=======
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                            <h2>{{ number_format($item->price) }}</h2>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                             <p>{{ $item->name }}</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>
@@ -267,6 +323,7 @@
                     </div>
                     <div class="item">
                         @foreach($fav_product as $item)
+<<<<<<< HEAD
                             <div class="col-sm-3">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
@@ -283,6 +340,14 @@
                                             @endif
                                             <img src="uploads/product/{{ $item->thumbnail }}" alt="">
                                             <h2>@if($item->sale == 0){{ number_format($item->price)}} @else {{ number_format($item->sale)}}  @endif</h2>
+=======
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="uploads/product/{{ $item->thumbnail }}" alt="">
+                                            <h2>{{ number_format($item->price) }}</h2>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                             <p>{{ $item->name }}</p>
                                             <a href="#" class="btn btn-default add-to-cart"><i
                                                         class="fa fa-shopping-cart"></i>Kiểm Tra Đơn Hàng</a>

@@ -80,6 +80,8 @@
             <a href="{{ url('admin/supplier') }}">
                 <i class="menu-icon fa fa-phone-square"></i>
                 <span class="menu-text"> Suppliers </span>
+<<<<<<< HEAD:resources/views/patials/admin/menu.blade.php
+=======
             </a>
         </li>
         
@@ -94,6 +96,36 @@
             <a href="{{ url('admin/order') }}">
                 <i class="menu-icon fa fa-pencil-square-o"></i>
                 <span class="menu-text"> Orders </span>
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/patials/admin/menu.blade.php
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/type') }}">
+                <i class="menu-icon fa fa-check-square-o"></i>
+                <span class="menu-text"> Types </span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/order') }}">
+                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <span class="menu-text"> Orders </span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="{{ url('admin/news') }}">
+                <i class="menu-icon fa fa-newspaper-o"></i>
+                <span class="menu-text"> News </span>
+            </a>
+        </li>
+        
+        
+        <li class="">
+            <a href="{{ url('admin/order-detail') }}">
+                <i class="menu-icon fa fa-info-circle"></i>
+                <span class="menu-text"> Order detail </span>
             </a>
         </li>
         

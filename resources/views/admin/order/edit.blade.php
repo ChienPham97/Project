@@ -81,10 +81,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="status"> Status </label>
                             <div class="col-sm-9">
+<<<<<<< HEAD
                                 <label>yes</label>
                                 {!! Form::radio('check', $statuses, $order->status , ['value' => 1])!!}
                                 <label>no</label>
                                 {!! Form::radio('check', $statuses, $order->status , ['value' => 0] )!!}
+=======
+                                {!! Form::select('status', $statuses, $order->status_id )!!}
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </div>
                         </div>
 

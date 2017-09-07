@@ -56,7 +56,11 @@ class NewsController extends Controller
         $news->title = $request->title;
         $news->content = $request->contents;
         $news->save();
+<<<<<<< HEAD
         Session::flash('success', 'Create news '. $news->title .' succesfully!');
+=======
+        Session::flash('success', 'Create news "id = ' . $news->id . '" succesfully!');
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
 
         return redirect('admin/news');
     }
@@ -105,7 +109,11 @@ class NewsController extends Controller
         $news->title = $request->title;
         $news->content = $request->contents;
         $news->save();
+<<<<<<< HEAD
         Session::flash('success', 'Edit news ' . $news->title . ' succesfully!');
+=======
+        Session::flash('success', 'Edit news "id = ' . $news->id . '" succesfully!');
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
 
         return redirect('admin/news');
     }
@@ -121,7 +129,11 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         !is_null($news->image) ? unlink('uploads/news/'.$news->image):null;
         $news->delete();
+<<<<<<< HEAD
         Session::flash('success', 'Delete news ' .  $news->title . ' succesfully!');
+=======
+        Session::flash('success', 'Delete news "id = ' .  $news->id . '" succesfully!');
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
         return redirect('admin/news');
     }
 }

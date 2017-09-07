@@ -28,18 +28,30 @@
 
                 <div class="page-header">
                     <h1>
+<<<<<<< HEAD
                         Edit  "{{ $types->title }}"
+=======
+                        Edit type "{{ $type->name }}"
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                     </h1>
                 </div><!-- /.page-header -->
 
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
+<<<<<<< HEAD
                         {!! Form::open(['method' => 'PUT', 'url' => 'admin/type/'.$types->id, 'role' => 'form', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="name"> Title *</label>
                             <div class="col-sm-9">
                                 {!! Form::text('title', $types->title, ['class' => 'col-xs-10 col-sm-5', 'placeholder' => $types->title, 'minlength' => '4', 'required']) !!}
+=======
+                        {!! Form::open(['method' => 'PUT', 'url' => 'admin/type/'.$type->id, 'role' => 'form', 'class' => 'form-horizontal']) !!}
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="name"> Name *</label>
+                            <div class="col-sm-9">
+                                {!! Form::text('name', $type->name, ['class' => 'col-xs-10 col-sm-5', 'placeholder' => $type->name, 'minlength' => '4', 'required']) !!}
+>>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </div>
                         </div>
 

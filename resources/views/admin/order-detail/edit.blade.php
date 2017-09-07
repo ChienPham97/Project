@@ -1,5 +1,5 @@
 @extends('layouts.admin.layout')
-@section('title') Edit Category @endsection
+@section('title')  Create Order Detail | Shop Computer  @endsection
 @section('content')
     <div class="main-content">
         <div class="main-content-inner">
@@ -7,11 +7,11 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="{{url('admin')}}">Home</a>
+                        <a href="{{ url('admin') }}">Home</a>
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/category') }}">Categories</a>
+                        <a href="{{ url('admin/order-detail') }}">Order detail</a>
                     </li>
                     <li class="active">Edit</li>
                 </ul><!-- /.breadcrumb -->
@@ -28,31 +28,38 @@
 
                 <div class="page-header">
                     <h1>
-                        Edit category "{{ $category->title }}"
+                        Create Order
                     </h1>
                 </div><!-- /.page-header -->
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        {!! Form::open(['method' => 'PATCH', 'url' => 'admin/category/' . $category->id, 'role' => 'form', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['method' => 'PUT', 'url' => 'admin/order-detail/'.$order_detail->id, 'role' => 'form', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="title"> Title *</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="order">Order Id</label>
                             <div class="col-sm-9">
-                                {!! Form::text('title', $category->title, ['class' => 'col-xs-10 col-sm-5', 'placeholder' => $category->title, 'minlength' => '4', 'required']) !!}
+                                {!! Form::select('order_id', $orders, $order_detail->order_id) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right" for="group">Group</label>
+                            <label class="col-sm-3 control-label no-padding-right" for="product"> Product </label>
                             <div class="col-sm-9">
-<<<<<<< HEAD
-                                {!! Form::select('type', $types , $category->type_id) !!}
-=======
-                                {!! Form::select('type', $types) !!}
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
+                                {!! Form::select('product_id', $products, $order_detail->product_id) !!}
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-sm-9 center">
                                 {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
@@ -65,4 +72,5 @@
             </div>
         </div>
     </div>
+
 @endsection
