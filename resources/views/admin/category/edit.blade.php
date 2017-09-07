@@ -46,11 +46,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="group">Group</label>
                             <div class="col-sm-9">
-<<<<<<< HEAD
                                 {!! Form::select('type', $types , $category->type_id) !!}
-=======
-                                {!! Form::select('type', $types) !!}
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </div>
                         </div>
                         <div class="form-group">

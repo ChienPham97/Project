@@ -39,12 +39,8 @@ class ProductController extends Controller
     {
         return view('admin.product.create', ['categories'=> $this->_categories]);
     }
-    
-<<<<<<< HEAD
-    public function store(Request $request)
-=======
+	
     public function store(ProductEditRequest $request)
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
     {
         $product = new Product();
         $thumbnail = null;
@@ -130,11 +126,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-<<<<<<< HEAD
-        unlink('uploads/product/'.$product->thumbnail);
-=======
         is_null($product->thumbnail)? null: unlink('uploads/product/'.$product->thumbnail);
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
         $product->delete();
         Session::flash('success', 'Delete Product "' .  $product->name . '" succesfully!');
         return redirect('admin/product');

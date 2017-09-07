@@ -80,8 +80,6 @@
             <a href="{{ url('admin/supplier') }}">
                 <i class="menu-icon fa fa-phone-square"></i>
                 <span class="menu-text"> Suppliers </span>
-<<<<<<< HEAD:resources/views/patials/admin/menu.blade.php
-=======
             </a>
         </li>
         
@@ -96,7 +94,6 @@
             <a href="{{ url('admin/order') }}">
                 <i class="menu-icon fa fa-pencil-square-o"></i>
                 <span class="menu-text"> Orders </span>
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2:resources/views/patials/admin/menu.blade.php
             </a>
         </li>
         

@@ -52,20 +52,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-
-<<<<<<< HEAD
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Login
-                                    </button>
-
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        Forgot Your Password?
-                                    </a>
-                                </div>
-=======
+                            </div>=
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -73,8 +60,6 @@
                                 </button>
                                 <a class="btn btn-link" href="{{url('register')}}">Register</a>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">Forgot Your Password?</a>
-                                
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                             </div>
                         </form>
 

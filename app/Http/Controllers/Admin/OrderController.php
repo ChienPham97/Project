@@ -23,17 +23,6 @@ class OrderController extends Controller
     {
         if ($request->has('keyword')) {
             $keyword = $request->get('keyword');
-<<<<<<< HEAD
-            $order = Order::with('user')->where('title', 'like', '%' . $keyword . '%')->get();
-        } else {
-            $order = Order::join('users', 'order.user_id','=','users.id')
-                ->join('statuses', 'order.id', '=', 'statuses.order_id')
-                ->select('order.*', 'users.name as username', 'statuses.check as status')
-                ->get();
-        }
-
-        return view('admin.order.show', [ 'order' => $order ]);
-=======
             $orders = Order::with('user')->where('title', 'like', '%' . $keyword . '%')->get();
         } else {
             $orders = Order::join('users', 'orders.user_id','=','users.id')
@@ -43,7 +32,6 @@ class OrderController extends Controller
         }
 
         return view('admin.order.show', [ 'orders' => $orders ]);
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
     }
 
     /**
@@ -117,11 +105,7 @@ class OrderController extends Controller
         $order->phone = $request->phone;
         $order->address = $request->address;
         $order->total = $request->total;
-<<<<<<< HEAD
-        $order->status = $request->status;
-=======
         $order->status_id = $request->status;
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
         $order->save();
         Session::flash('success', 'Edit order "id = ' . $order->id . '" successfully!');
 

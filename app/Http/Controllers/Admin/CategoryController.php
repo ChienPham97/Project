@@ -72,11 +72,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-<<<<<<< HEAD
         $types = Type::get()->pluck('title','id');
-=======
-        $types = Type::get()->pluck('name','id');
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
         return view('admin.category.edit', ['category' => $category, 'types' => $types]);
     }
 

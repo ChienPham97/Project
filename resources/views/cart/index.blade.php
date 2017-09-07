@@ -36,7 +36,6 @@
                     </tr>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
                     <?php $totalAmount = 0; ?>
                     @foreach(Cart::content() as $item)
                         @if(isset($item->id))
@@ -84,42 +83,6 @@
                         @else
                             <tr>Quý khách chưa đặt mua sản phẩm nào</tr>
                         @endif
-=======
-                    <?php $totalAmount =0 ; ?>
-                    @foreach(Cart::content() as $row)
-                        <tr>
-                            <td class="cart_product">
-                                <a href=""><img src="{{ url('uploads/product/'.$row->options->thumbnail) }}" alt="" class="img-bill"></a>
-                            </td>
-                            <td class="cart_description">
-                                <h4><a href="">{{ $row->name }}</a></h4>
-                            </td>
-                            <td class="cart_price">
-                                <p>{{ number_format($row->price) }}</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity"
-                                           value="{{ $row->qty }}"
-                                           autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">
-                                    <?php
-                                        $m = $row->price * $row->qty;
-                                        $totalAmount += $m;
-                                        echo number_format($m);
-                                    ?>
-                                </p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href="{{ url('cart/destroy/'.$row->id) }}"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                     @endforeach
                     <tr>
                         <td colspan="4">&nbsp;</td>
@@ -134,11 +97,6 @@
                     </tr>
                     </tbody>
                 </table>
-                <div>
-                    <a href="{{ url('product') }}">Tiếp tục mua hàng</a>
-                    <a href="{{ url('cart/update') }}">Thanh Toán</a>
-                </div>
-
             </div>
 
             {!! Form::open(['method' => 'POST', 'url' => 'checkout']) !!}

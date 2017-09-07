@@ -87,11 +87,7 @@
                                                 </td>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->title }}</td>
-<<<<<<< HEAD
                                                 <td>{{ (isset($item->type->title)?$item->type->title:"") }}</td>
-=======
-                                                <td>{{ (isset($item->type->name)?$item->type->name:"") }}</td>
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                                 <td>
                                                     {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/category/'.$item->id,'role'=>'from' ]) !!}
                                                     <a href="{{ url('admin/category/'.$item->id.'/edit') }}"

@@ -88,13 +88,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-<<<<<<< HEAD
-                                    @if($order)
-                                        @foreach($order as $item)
-=======
                                     @if($orders)
                                         @foreach($orders as $item)
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                             <tr>
                                                 <td>
                                                     <input type="checkbox"/>

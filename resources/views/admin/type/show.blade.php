@@ -83,11 +83,7 @@
                                                     <input type="checkbox"/>
                                                 </td>
                                                 <td>{{ $item->id }}</td>
-<<<<<<< HEAD
                                                 <td>{{ $item->title }}</td>
-=======
-                                                <td>{{ $item->name }}</td>
->>>>>>> 4447da6b56cfb18bb64c607c0d5ff297220695f2
                                                 <td>
                                                     {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/type/'.$item->id,'role'=>'from' ]) !!}
                                                     <a href="{{ url('admin/type/'.$item->id.'/edit') }}"
