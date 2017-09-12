@@ -28,7 +28,7 @@
 
                 <div class="page-header">
                     <h1>
-                        Create Order
+                        Edit Order
                     </h1>
                 </div><!-- /.page-header -->
 

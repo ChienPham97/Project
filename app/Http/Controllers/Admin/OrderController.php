@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Order;
+use App\OrderDetail;
 use App\Status;
 use App\User;
 use Session;
@@ -13,6 +14,7 @@ class OrderController extends Controller
 {
     private $_users;
     private $_statuses;
+    private $_orderDetail;
 
     public function __construct()
     {
@@ -85,8 +87,15 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        $this->_orderDetail=OrderDetail::join('products', 'order_detail.product_id', 'products.id')
+            ->select('order_detail.*', 'products.name', 'products.price')
+            ->get();
+        $total = 0;
+        foreach ($this->_orderDetail as $item){
+            $total+=$item->price;
+        }
         $order = Order::findOrFail($id);
-        return view('admin.order.edit', ['order' => $order,'users'=>$this->_users, 'statuses' => $this->_statuses]);
+        return view('admin.order.edit', ['order' => $order,'users'=>$this->_users, 'statuses' => $this->_statuses, 'order_detail'=>$this->_orderDetail, 'total' => $total] );
     }
 
     /**

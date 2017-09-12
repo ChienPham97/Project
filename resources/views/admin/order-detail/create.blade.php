@@ -11,7 +11,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('admin/order-detail') }}">Order detail</a>
+                        <a href="{{ url('admin/order-detail/'.$id.'/edit') }}">Order detail</a>
                     </li>
                     <li class="active">Create</li>
                 </ul><!-- /.breadcrumb -->
@@ -28,7 +28,7 @@
 
                 <div class="page-header">
                     <h1>
-                        Create Order
+                        Add new product to order "id = {{ $id }}"
                     </h1>
                 </div><!-- /.page-header -->
 
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="order">Order Id</label>
                             <div class="col-sm-9">
-                                {!! Form::select('order_id', $orders, null) !!}
+                                {!! Form::number('order_id', $id, ['min'=>0, 'readonly']) !!}
                             </div>
                         </div>
 
@@ -57,6 +57,13 @@
                             <label class="col-sm-3 control-label no-padding-right" for="product"> Product </label>
                             <div class="col-sm-9">
                                 {!! Form::select('product_id', $products, null) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="number"> Number </label>
+                            <div class="col-sm-9">
+                                {!! Form::number('number', 1, ['min'=>1]) !!}
                             </div>
                         </div>
 

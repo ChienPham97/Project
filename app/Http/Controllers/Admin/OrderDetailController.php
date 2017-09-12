@@ -44,7 +44,7 @@ class OrderDetailController extends Controller
      */
     public function create()
     {
-        return view('admin.order-detail.create',['orders' => $this->_orders, 'products' => $this->_products]);
+        return view('admin.order-detail.create',['orders' => $this->_orders, 'products' => $this->_products, 'id'=>Session('id')]);
     }
 
     /**
@@ -55,14 +55,14 @@ class OrderDetailController extends Controller
      */
     public function store(OrderDetailRequest $request)
     {
-
         $order_detail = new OrderDetail();
         $order_detail->order_id = $request->order_id;
         $order_detail->product_id = $request->product_id;
+        $order_detail->number = $request->number;
         $order_detail->save();
         Session::flash('success', 'Create order "id = ' . $order_detail->id . '" succesfully!');
 
-        return redirect('admin/order-detail');
+        return redirect('admin/order-detail/'. $request->order_id .'/edit');
     }
 
     /**
@@ -84,8 +84,12 @@ class OrderDetailController extends Controller
      */
     public function edit($id)
     {
-        $order_detail = OrderDetail::findOrFail($id);
-        return view('admin.order-detail.edit',['order_detail' => $order_detail,'orders' => $this->_orders, 'products' => $this->_products]);
+        $order_detail = OrderDetail::join('products', 'order_detail.product_id', '=', 'products.id')
+            ->where('order_detail.order_id', $id)
+            ->select('order_detail.*', 'products.price')
+            ->get();
+        $no = 0;
+        return view('admin.order-detail.edit',['order_detail' => $order_detail,'orders' => $this->_orders, 'products' => $this->_products, 'id'=>$id, 'no' => $no]);
     }
 
     /**
@@ -100,10 +104,11 @@ class OrderDetailController extends Controller
         $order_detail = OrderDetail::findOrFail($id);
         $order_detail->order_id = $request->order_id;
         $order_detail->product_id = $request->product_id;
+        $order_detail->number = $request->number;
         $order_detail->save();
-        Session::flash('success', 'Edit order detail "' . $order_detail->id . '" successfully!');
+        Session::flash('success', 'Update order detail "id = ' . $order_detail->id . '" successfully!');
 
-        return redirect('admin/order-detail');
+        return redirect('admin/order-detail/'.$request->order_id.'/edit');
     }
 
     /**
@@ -115,8 +120,9 @@ class OrderDetailController extends Controller
     public function destroy($id)
     {
         $order_detail = OrderDetail::findOrFail($id);
+        $re = $order_detail->order_id;
         $order_detail->delete();
-        Session::flash('success', 'Delete order detail "' .  $order_detail->id . '" succesfully!');
-        return redirect('admin/order-detail');
+        Session::flash('success', 'Delete order detail "id = ' .  $order_detail->id . '" succesfully!');
+        return redirect('admin/order-detail/' . $re . '/edit');
     }
 }

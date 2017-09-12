@@ -104,8 +104,8 @@
                                                 <td>{{ $item->status }}</td>
                                                 <td>
                                                     {!! Form::open([ 'method'=>'DELETE' , 'url' =>'admin/order/'.$item->id,'role'=>'from' ]) !!}
-                                                    <a href="{{ url('admin/order/'.$item->id.'/edit') }}"
-                                                       class="btn">Edit</a>
+                                                    <a href="{{ url('admin/order-detail/'.$item->id.'/edit') }}" class="btn">Detail</a>
+                                                    <a href="{{ url('admin/order/'.$item->id.'/edit') }}" class="btn">Edit</a>
                                                     <button type="submit" value="DELETE" class="btn btn-danger"
                                                             onclick="return confirm('Are you sure?');">Delete
                                                     </button>
